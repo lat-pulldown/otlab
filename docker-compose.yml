@@ -20,9 +20,9 @@ services:
       - "8080:8080"
     restart: always
 
-  deeplog:
-    build: ./docker/deeplog
-    volumes:
-      - ./models:/app/models
-      - ./scripts:/app/scripts
-    restart: always
+  #deeplog:
+  #  build: ./docker/deeplog
+  #  volumes:
+  #    - ./models:/app/models
+  #    - ./scripts:/app/scripts
+  #  restart: always
