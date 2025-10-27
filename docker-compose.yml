@@ -1,0 +1,28 @@
+services:
+  caldera:
+    build: ./docker/caldera
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./scripts:/app/scripts
+    restart: always
+
+  conpot:
+    build: ./docker/conpot
+    ports:
+      - "102:102"
+      - "502:502"
+    restart: always
+
+  thingsboard:
+    build: ./docker/thingsboard
+    ports:
+      - "8080:8080"
+    restart: always
+
+  deeplog:
+    build: ./docker/deeplog
+    volumes:
+      - ./models:/app/models
+      - ./scripts:/app/scripts
+    restart: always
