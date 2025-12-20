@@ -1,0 +1,64 @@
+2025-12-14 07:43:55,143 New modbus session from 192.168.3.18 (3ec64822-89df-4e09-8f65-04b9692ab63e)
+2025-12-14 07:43:55,145 New Modbus connection from 192.168.3.18:59424. (3ec64822-89df-4e09-8f65-04b9692ab63e)
+2025-12-14 07:43:55,148 Modbus client disconnected. (3ec64822-89df-4e09-8f65-04b9692ab63e)
+2025-12-14 07:44:24,207 New Modbus connection from 192.168.3.18:59432. (3ec64822-89df-4e09-8f65-04b9692ab63e)
+2025-12-14 07:44:24,223 Modbus client disconnected. (3ec64822-89df-4e09-8f65-04b9692ab63e)
+2025-12-14 07:44:56,226 New Modbus connection from 192.168.3.18:59436. (3ec64822-89df-4e09-8f65-04b9692ab63e)
+2025-12-14 07:44:56,237 Modbus client disconnected. (3ec64822-89df-4e09-8f65-04b9692ab63e)
+2025-12-14 07:45:28,657 Session timed out: 3ec64822-89df-4e09-8f65-04b9692ab63e
+2025-12-14 07:46:31,230 New modbus session from 192.168.3.18 (ca5b2f67-af30-4c6b-9dbc-2a5e43358b9d)
+2025-12-14 07:46:31,241 New Modbus connection from 192.168.3.18:59465. (ca5b2f67-af30-4c6b-9dbc-2a5e43358b9d)
+2025-12-14 07:46:31,272 New http session from 192.168.3.18 (14601bcb-387a-4444-b83f-f311a665cb42)
+2025-12-14 07:46:31,274 HTTP/1.1 GET request from ('192.168.3.18', 59466): ('/config', [('Host', '192.168.3.24'), ('User-Agent', 'python-requests/2.32.5'), ('Accept-Encoding', 'gzip, deflate'), ('Accept', '*/*'), ('Connection', 'keep-alive')], None). 14601bcb-387a-4444-b83f-f311a665cb42
+2025-12-14 07:46:31,275 HTTP/1.1 response to ('192.168.3.18', 59466): 404. 14601bcb-387a-4444-b83f-f311a665cb42
+2025-12-14 07:46:31,285 HTTP/1.1 GET request from ('192.168.3.18', 59467): ('/login', [('Host', '192.168.3.24'), ('User-Agent', 'python-requests/2.32.5'), ('Accept-Encoding', 'gzip, deflate'), ('Accept', '*/*'), ('Connection', 'keep-alive')], None). 14601bcb-387a-4444-b83f-f311a665cb42
+2025-12-14 07:46:31,285 HTTP/1.1 response to ('192.168.3.18', 59467): 404. 14601bcb-387a-4444-b83f-f311a665cb42
+2025-12-14 07:46:31,287 Modbus client disconnected. (ca5b2f67-af30-4c6b-9dbc-2a5e43358b9d)
+2025-12-14 07:47:03,807 Session timed out: ca5b2f67-af30-4c6b-9dbc-2a5e43358b9d
+2025-12-14 07:47:05,818 Session timed out: 14601bcb-387a-4444-b83f-f311a665cb42
+2025-12-14 07:47:06,295 New modbus session from 192.168.3.18 (d77603c1-38fd-48fa-919a-b2234b33240f)
+2025-12-14 07:47:06,312 New Modbus connection from 192.168.3.18:59470. (d77603c1-38fd-48fa-919a-b2234b33240f)
+2025-12-14 07:47:06,364 New http session from 192.168.3.18 (520e1921-783b-4000-9214-711a24069fe3)
+2025-12-14 07:47:06,366 HTTP/1.1 GET request from ('192.168.3.18', 59471): ('/config', [('Host', '192.168.3.24'), ('User-Agent', 'python-requests/2.32.5'), ('Accept-Encoding', 'gzip, deflate'), ('Accept', '*/*'), ('Connection', 'keep-alive')], None). 520e1921-783b-4000-9214-711a24069fe3
+2025-12-14 07:47:06,367 HTTP/1.1 response to ('192.168.3.18', 59471): 404. 520e1921-783b-4000-9214-711a24069fe3
+2025-12-14 07:47:06,389 HTTP/1.1 GET request from ('192.168.3.18', 59472): ('/login', [('Host', '192.168.3.24'), ('User-Agent', 'python-requests/2.32.5'), ('Accept-Encoding', 'gzip, deflate'), ('Accept', '*/*'), ('Connection', 'keep-alive')], None). 520e1921-783b-4000-9214-711a24069fe3
+2025-12-14 07:47:06,389 HTTP/1.1 response to ('192.168.3.18', 59472): 404. 520e1921-783b-4000-9214-711a24069fe3
+2025-12-14 07:47:06,397 Modbus client disconnected. (d77603c1-38fd-48fa-919a-b2234b33240f)
+2025-12-14 07:47:38,409 New Modbus connection from 192.168.3.18:59480. (d77603c1-38fd-48fa-919a-b2234b33240f)
+2025-12-14 07:47:38,414 Modbus client disconnected. (d77603c1-38fd-48fa-919a-b2234b33240f)
+2025-12-14 07:47:40,463 Session timed out: 520e1921-783b-4000-9214-711a24069fe3
+2025-12-14 07:48:10,716 Session timed out: d77603c1-38fd-48fa-919a-b2234b33240f
+2025-12-14 07:48:16,405 New modbus session from 192.168.3.18 (59ab094e-70d7-4de4-b2c7-620345747245)
+2025-12-14 07:48:16,406 New Modbus connection from 192.168.3.18:59484. (59ab094e-70d7-4de4-b2c7-620345747245)
+2025-12-14 07:48:16,419 New http session from 192.168.3.18 (bcc41c73-0a2e-46e6-b5c1-7770c13446eb)
+2025-12-14 07:48:16,419 HTTP/1.1 GET request from ('192.168.3.18', 59485): ('/login', [('Host', '192.168.3.24'), ('User-Agent', 'python-requests/2.32.5'), ('Accept-Encoding', 'gzip, deflate'), ('Accept', '*/*'), ('Connection', 'keep-alive')], None). bcc41c73-0a2e-46e6-b5c1-7770c13446eb
+2025-12-14 07:48:16,420 HTTP/1.1 response to ('192.168.3.18', 59485): 404. bcc41c73-0a2e-46e6-b5c1-7770c13446eb
+2025-12-14 07:48:16,427 HTTP/1.1 GET request from ('192.168.3.18', 59486): ('/config', [('Host', '192.168.3.24'), ('User-Agent', 'python-requests/2.32.5'), ('Accept-Encoding', 'gzip, deflate'), ('Accept', '*/*'), ('Connection', 'keep-alive')], None). bcc41c73-0a2e-46e6-b5c1-7770c13446eb
+2025-12-14 07:48:16,427 HTTP/1.1 response to ('192.168.3.18', 59486): 404. bcc41c73-0a2e-46e6-b5c1-7770c13446eb
+2025-12-14 07:48:16,428 Modbus client disconnected. (59ab094e-70d7-4de4-b2c7-620345747245)
+2025-12-14 07:48:48,887 Session timed out: 59ab094e-70d7-4de4-b2c7-620345747245
+2025-12-14 07:48:50,900 Session timed out: bcc41c73-0a2e-46e6-b5c1-7770c13446eb
+2025-12-14 07:48:59,433 New modbus session from 192.168.3.18 (856faac9-827d-492a-bf36-90b875844510)
+2025-12-14 07:48:59,433 New Modbus connection from 192.168.3.18:59497. (856faac9-827d-492a-bf36-90b875844510)
+2025-12-14 07:48:59,434 Modbus client disconnected. (856faac9-827d-492a-bf36-90b875844510)
+2025-12-14 07:49:31,435 New Modbus connection from 192.168.3.18:59503. (856faac9-827d-492a-bf36-90b875844510)
+2025-12-14 07:49:31,463 New http session from 192.168.3.18 (c1f5fde4-5498-41cb-a98e-98e571f5b415)
+2025-12-14 07:49:31,464 HTTP/1.1 GET request from ('192.168.3.18', 59504): ('/scada', [('Host', '192.168.3.24'), ('User-Agent', 'python-requests/2.32.5'), ('Accept-Encoding', 'gzip, deflate'), ('Accept', '*/*'), ('Connection', 'keep-alive')], None). c1f5fde4-5498-41cb-a98e-98e571f5b415
+2025-12-14 07:49:31,464 HTTP/1.1 response to ('192.168.3.18', 59504): 404. c1f5fde4-5498-41cb-a98e-98e571f5b415
+2025-12-14 07:49:31,471 HTTP/1.1 GET request from ('192.168.3.18', 59505): ('/', [('Host', '192.168.3.24'), ('User-Agent', 'python-requests/2.32.5'), ('Accept-Encoding', 'gzip, deflate'), ('Accept', '*/*'), ('Connection', 'keep-alive')], None). c1f5fde4-5498-41cb-a98e-98e571f5b415
+2025-12-14 07:49:31,472 HTTP/1.1 response to ('192.168.3.18', 59505): 302. c1f5fde4-5498-41cb-a98e-98e571f5b415
+2025-12-14 07:49:31,534 HTTP/1.1 GET request from ('192.168.3.18', 59505): ('/index.html', [('Host', '192.168.3.24'), ('User-Agent', 'python-requests/2.32.5'), ('Accept-Encoding', 'gzip, deflate'), ('Accept', '*/*'), ('Connection', 'keep-alive')], None). c1f5fde4-5498-41cb-a98e-98e571f5b415
+2025-12-14 07:49:31,535 HTTP/1.1 response to ('192.168.3.18', 59505): 200. c1f5fde4-5498-41cb-a98e-98e571f5b415
+2025-12-14 07:49:31,538 Modbus client disconnected. (856faac9-827d-492a-bf36-90b875844510)
+2025-12-14 07:50:03,923 Session timed out: 856faac9-827d-492a-bf36-90b875844510
+2025-12-14 07:50:05,932 Session timed out: c1f5fde4-5498-41cb-a98e-98e571f5b415
+2025-12-14 07:50:07,540 New modbus session from 192.168.3.18 (57f2b72f-8cf9-4a44-86ec-2a5d27727256)
+2025-12-14 07:50:07,540 New Modbus connection from 192.168.3.18:59507. (57f2b72f-8cf9-4a44-86ec-2a5d27727256)
+2025-12-14 07:50:07,541 Modbus client disconnected. (57f2b72f-8cf9-4a44-86ec-2a5d27727256)
+2025-12-14 07:50:40,002 Session timed out: 57f2b72f-8cf9-4a44-86ec-2a5d27727256
+2025-12-14 07:50:40,553 New modbus session from 192.168.3.18 (a5541a6e-76ad-4e1e-8276-1aba0d52557e)
+2025-12-14 07:50:40,554 New Modbus connection from 192.168.3.18:59511. (a5541a6e-76ad-4e1e-8276-1aba0d52557e)
+2025-12-14 07:50:40,560 Modbus client disconnected. (a5541a6e-76ad-4e1e-8276-1aba0d52557e)
+2025-12-14 07:51:10,549 New Modbus connection from 192.168.3.18:59528. (a5541a6e-76ad-4e1e-8276-1aba0d52557e)
+2025-12-14 07:51:10,550 Modbus client disconnected. (a5541a6e-76ad-4e1e-8276-1aba0d52557e)
+2025-12-14 07:51:10,552 New Modbus connection from 192.168.3.18:59529. (a5541a6e-76ad-4e1e-8276-1aba0d52557e)

@@ -1,0 +1,133 @@
+2025-12-07 16:25:24,596 New modbus session from 172.19.0.1 (dd649c45-3931-4c59-ba63-bb6ad1ee4938)
+2025-12-07 16:25:24,617 New Modbus connection from 172.19.0.1:52316. (dd649c45-3931-4c59-ba63-bb6ad1ee4938)
+2025-12-07 16:25:24,625 Modbus client disconnected. (dd649c45-3931-4c59-ba63-bb6ad1ee4938)
+2025-12-07 16:25:55,170 Session timed out: dd649c45-3931-4c59-ba63-bb6ad1ee4938
+2025-12-07 16:26:43,163 New modbus session from 172.19.0.1 (3733adf7-3825-4755-b617-f84048002753)
+2025-12-07 16:26:43,165 New Modbus connection from 172.19.0.1:58116. (3733adf7-3825-4755-b617-f84048002753)
+2025-12-07 16:26:43,195 Modbus client disconnected. (3733adf7-3825-4755-b617-f84048002753)
+2025-12-07 16:27:15,472 Session timed out: 3733adf7-3825-4755-b617-f84048002753
+2025-12-07 16:32:51,496 New modbus session from 172.19.0.1 (a2399cd1-a1a7-4497-ba14-8f7640a42148)
+2025-12-07 16:32:51,547 New Modbus connection from 172.19.0.1:53706. (a2399cd1-a1a7-4497-ba14-8f7640a42148)
+2025-12-07 16:32:51,549 Modbus client disconnected. (a2399cd1-a1a7-4497-ba14-8f7640a42148)
+2025-12-07 16:33:23,868 Session timed out: a2399cd1-a1a7-4497-ba14-8f7640a42148
+2025-12-07 17:08:20,742 New modbus session from 172.19.0.1 (bbbeacbd-7fab-4bb0-b06f-38ab16fc6ed8)
+2025-12-07 17:08:20,769 New Modbus connection from 172.19.0.1:52324. (bbbeacbd-7fab-4bb0-b06f-38ab16fc6ed8)
+2025-12-07 17:08:20,895 Function 43 can not be broadcasted
+2025-12-07 17:08:21,495 Modbus traffic from 172.19.0.1: {'request': b'5a4700000005002b0e0100', 'slave_id': 0, 'function_code': None, 'response': b''} (bbbeacbd-7fab-4bb0-b06f-38ab16fc6ed8)
+2025-12-07 17:08:21,630 Modbus connection terminated with client 172.19.0.1.
+2025-12-07 17:08:52,473 Session timed out: bbbeacbd-7fab-4bb0-b06f-38ab16fc6ed8
+2025-12-07 18:11:31,657 New modbus session from 172.19.0.1 (d2795e07-981a-4f47-a143-75787351e007)
+2025-12-07 18:11:31,674 New Modbus connection from 172.19.0.1:33414. (d2795e07-981a-4f47-a143-75787351e007)
+2025-12-07 18:11:31,685 Function 3 can not be broadcasted
+2025-12-07 18:11:31,689 Modbus traffic from 172.19.0.1: {'request': b'000000000006000300000001', 'slave_id': 0, 'function_code': None, 'response': b''} (d2795e07-981a-4f47-a143-75787351e007)
+2025-12-07 18:11:31,808 Modbus connection terminated with client 172.19.0.1.
+2025-12-07 18:11:32,234 New Modbus connection from 172.19.0.1:33426. (d2795e07-981a-4f47-a143-75787351e007)
+2025-12-07 18:11:37,291 Exception occurred in ModbusServer.handle() at sock.recv(): timed out
+2025-12-07 18:11:37,291 Modbus client disconnected. (d2795e07-981a-4f47-a143-75787351e007)
+2025-12-07 18:11:37,470 New Modbus connection from 172.19.0.1:33442. (d2795e07-981a-4f47-a143-75787351e007)
+2025-12-07 18:11:42,678 New Modbus connection from 172.19.0.1:48682. (d2795e07-981a-4f47-a143-75787351e007)
+2025-12-07 18:11:43,083 New Modbus connection from 172.19.0.1:48690. (d2795e07-981a-4f47-a143-75787351e007)
+2025-12-07 18:11:43,085 Modbus client provided data d2795e07-981a-4f47-a143-75787351e007 but invalid.
+2025-12-07 18:12:14,466 Session timed out: d2795e07-981a-4f47-a143-75787351e007
+2025-12-08 06:55:28,992 New modbus session from 172.19.0.1 (1f713e2e-cfd9-4d46-9576-48587f08ecae)
+2025-12-08 06:55:29,038 New Modbus connection from 172.19.0.1:39984. (1f713e2e-cfd9-4d46-9576-48587f08ecae)
+2025-12-08 06:55:29,058 Function 43 can not be broadcasted
+2025-12-08 06:55:29,068 Modbus traffic from 172.19.0.1: {'request': b'5a4700000005002b0e0100', 'slave_id': 0, 'function_code': None, 'response': b''} (1f713e2e-cfd9-4d46-9576-48587f08ecae)
+2025-12-08 06:55:29,174 Modbus connection terminated with client 172.19.0.1.
+2025-12-08 06:56:01,552 Session timed out: 1f713e2e-cfd9-4d46-9576-48587f08ecae
+2025-12-08 07:31:33,061 New modbus session from 172.19.0.1 (f630b282-b718-48e6-ae54-7f260f784c4e)
+2025-12-08 07:31:33,063 New Modbus connection from 172.19.0.1:43454. (f630b282-b718-48e6-ae54-7f260f784c4e)
+2025-12-08 07:31:33,063 Modbus client provided data f630b282-b718-48e6-ae54-7f260f784c4e but invalid.
+2025-12-08 07:32:05,664 Session timed out: f630b282-b718-48e6-ae54-7f260f784c4e
+2025-12-08 07:33:05,241 New modbus session from 172.19.0.1 (a4e3f6a0-355d-4f8e-8b51-22990299e228)
+2025-12-08 07:33:05,243 New Modbus connection from 172.19.0.1:32922. (a4e3f6a0-355d-4f8e-8b51-22990299e228)
+2025-12-08 07:33:35,602 Session timed out: a4e3f6a0-355d-4f8e-8b51-22990299e228
+2025-12-08 07:34:34,114 New modbus session from 172.19.0.1 (8f9b6839-5f06-498f-af65-5a87ddd821fd)
+2025-12-08 07:34:34,116 New Modbus connection from 172.19.0.1:48550. (8f9b6839-5f06-498f-af65-5a87ddd821fd)
+2025-12-08 07:35:04,591 Session timed out: 8f9b6839-5f06-498f-af65-5a87ddd821fd
+2025-12-08 07:36:07,242 New modbus session from 172.19.0.1 (7da82906-e813-40ca-b73c-ef504bd0af8b)
+2025-12-08 07:36:07,262 New Modbus connection from 172.19.0.1:57352. (7da82906-e813-40ca-b73c-ef504bd0af8b)
+2025-12-08 07:36:37,608 Session timed out: 7da82906-e813-40ca-b73c-ef504bd0af8b
+2025-12-08 07:37:18,091 New modbus session from 172.19.0.1 (c29a62ac-5d1e-4782-9393-51655d2d5e7f)
+2025-12-08 07:37:18,093 New Modbus connection from 172.19.0.1:60230. (c29a62ac-5d1e-4782-9393-51655d2d5e7f)
+2025-12-08 07:37:18,094 Function 43 can not be broadcasted
+2025-12-08 07:37:18,095 Modbus traffic from 172.19.0.1: {'request': b'5a4700000005002b0e0100', 'slave_id': 0, 'function_code': None, 'response': b''} (c29a62ac-5d1e-4782-9393-51655d2d5e7f)
+2025-12-08 07:37:18,206 Modbus connection terminated with client 172.19.0.1.
+2025-12-08 07:37:50,716 Session timed out: c29a62ac-5d1e-4782-9393-51655d2d5e7f
+2025-12-08 07:38:44,983 New modbus session from 172.19.0.1 (ee4ebbdb-39e2-4bd8-bb44-277069209378)
+2025-12-08 07:38:44,987 New Modbus connection from 172.19.0.1:52946. (ee4ebbdb-39e2-4bd8-bb44-277069209378)
+2025-12-08 07:39:15,411 Session timed out: ee4ebbdb-39e2-4bd8-bb44-277069209378
+2025-12-08 07:40:01,374 New modbus session from 172.19.0.1 (4dbee35d-702d-4cd3-bc97-2b3222f98140)
+2025-12-08 07:40:01,376 New Modbus connection from 172.19.0.1:51680. (4dbee35d-702d-4cd3-bc97-2b3222f98140)
+2025-12-08 07:40:31,609 Session timed out: 4dbee35d-702d-4cd3-bc97-2b3222f98140
+2025-12-08 08:11:55,505 New modbus session from 172.19.0.1 (e25e1492-3140-43d3-9bd5-2cbf9c869246)
+2025-12-08 08:11:55,507 New Modbus connection from 172.19.0.1:34278. (e25e1492-3140-43d3-9bd5-2cbf9c869246)
+2025-12-08 08:11:55,508 Function 43 can not be broadcasted
+2025-12-08 08:11:55,509 Modbus traffic from 172.19.0.1: {'request': b'03e800000005002b0e0100', 'slave_id': 0, 'function_code': None, 'response': b''} (e25e1492-3140-43d3-9bd5-2cbf9c869246)
+2025-12-08 08:11:55,613 Modbus connection terminated with client 172.19.0.1.
+2025-12-08 08:11:56,673 New Modbus connection from 172.19.0.1:51504. (e25e1492-3140-43d3-9bd5-2cbf9c869246)
+2025-12-08 08:11:56,763 Modbus traffic from 172.19.0.1: {'request': b'03e900000005012b0e0100', 'slave_id': 1, 'function_code': 43, 'response': b'2b0e010100000300075369656d656e73010753494d41544943020653372d323030'} (e25e1492-3140-43d3-9bd5-2cbf9c869246)
+2025-12-08 08:11:56,769 Modbus response sent to 172.19.0.1
+2025-12-08 08:11:56,901 Modbus traffic from 172.19.0.1: {'request': b'04e700000005ff2b0e0100', 'slave_id': 255, 'function_code': None, 'response': b''} (e25e1492-3140-43d3-9bd5-2cbf9c869246)
+2025-12-08 08:11:56,901 Modbus response sent to 172.19.0.1
+2025-12-08 08:11:57,027 Modbus client disconnected. (e25e1492-3140-43d3-9bd5-2cbf9c869246)
+2025-12-08 08:12:27,366 Session timed out: e25e1492-3140-43d3-9bd5-2cbf9c869246
+2025-12-08 09:25:54,018 New modbus session from 172.19.0.1 (e2fa1479-2a4b-470b-b8a7-267631844389)
+2025-12-08 09:25:54,027 New Modbus connection from 172.19.0.1:58778. (e2fa1479-2a4b-470b-b8a7-267631844389)
+2025-12-08 09:25:54,028 Modbus client disconnected. (e2fa1479-2a4b-470b-b8a7-267631844389)
+2025-12-08 09:26:26,319 Session timed out: e2fa1479-2a4b-470b-b8a7-267631844389
+2025-12-08 12:50:08,370 New modbus session from 172.19.0.1 (6cb52a46-dada-49d9-a492-1bbe00962bf6)
+2025-12-08 12:50:08,443 New Modbus connection from 172.19.0.1:59754. (6cb52a46-dada-49d9-a492-1bbe00962bf6)
+2025-12-08 12:50:09,840 Function 43 can not be broadcasted
+2025-12-08 12:50:09,852 Modbus traffic from 172.19.0.1: {'request': b'5a4700000005002b0e0100', 'slave_id': 0, 'function_code': None, 'response': b''} (6cb52a46-dada-49d9-a492-1bbe00962bf6)
+2025-12-08 12:50:09,971 Modbus connection terminated with client 172.19.0.1.
+2025-12-08 12:50:17,877 New Modbus connection from 172.19.0.1:42114. (6cb52a46-dada-49d9-a492-1bbe00962bf6)
+2025-12-08 12:50:21,487 Modbus client disconnected. (6cb52a46-dada-49d9-a492-1bbe00962bf6)
+2025-12-08 12:50:21,622 New Modbus connection from 172.19.0.1:55878. (6cb52a46-dada-49d9-a492-1bbe00962bf6)
+2025-12-08 12:50:27,530 New Modbus connection from 172.19.0.1:55886. (6cb52a46-dada-49d9-a492-1bbe00962bf6)
+2025-12-08 12:50:28,586 Modbus client disconnected. (6cb52a46-dada-49d9-a492-1bbe00962bf6)
+2025-12-08 12:50:37,741 New Modbus connection from 172.19.0.1:45704. (6cb52a46-dada-49d9-a492-1bbe00962bf6)
+2025-12-08 14:58:50,584 New modbus session from 172.19.0.1 (7470f804-afc0-412f-9254-b6cf944092df)
+2025-12-08 14:58:50,587 New Modbus connection from 172.19.0.1:60584. (7470f804-afc0-412f-9254-b6cf944092df)
+2025-12-08 14:58:50,589 Modbus client disconnected. (7470f804-afc0-412f-9254-b6cf944092df)
+2025-12-08 14:59:03,518 New Modbus connection from 172.19.0.1:42514. (7470f804-afc0-412f-9254-b6cf944092df)
+2025-12-08 14:59:03,520 Modbus client disconnected. (7470f804-afc0-412f-9254-b6cf944092df)
+2025-12-08 14:59:33,806 Session timed out: 7470f804-afc0-412f-9254-b6cf944092df
+2025-12-08 15:02:52,296 New modbus session from 172.19.0.1 (67521c5a-7fd2-4766-953c-9f2e225de8e7)
+2025-12-08 15:02:52,297 New Modbus connection from 172.19.0.1:42674. (67521c5a-7fd2-4766-953c-9f2e225de8e7)
+2025-12-08 15:02:52,298 Modbus client disconnected. (67521c5a-7fd2-4766-953c-9f2e225de8e7)
+2025-12-08 15:03:24,581 Session timed out: 67521c5a-7fd2-4766-953c-9f2e225de8e7
+2025-12-08 15:30:37,153 New modbus session from 172.19.0.1 (356a1248-855f-4fec-bea0-3182e6663586)
+2025-12-08 15:30:37,155 New Modbus connection from 172.19.0.1:50528. (356a1248-855f-4fec-bea0-3182e6663586)
+2025-12-08 15:30:37,156 Modbus client disconnected. (356a1248-855f-4fec-bea0-3182e6663586)
+2025-12-08 15:31:09,484 Session timed out: 356a1248-855f-4fec-bea0-3182e6663586
+2025-12-09 12:00:00 Function 43 can not be broadcasted
+2025-12-09 12:00:00 Function 43 can not be broadcasted
+2025-12-08 18:42:34,293 New modbus session from 172.19.0.1 (a8a75934-e61d-48d4-bf82-87160f8d8aab)
+2025-12-08 18:42:34,504 New Modbus connection from 172.19.0.1:55006. (a8a75934-e61d-48d4-bf82-87160f8d8aab)
+2025-12-08 18:42:34,526 Modbus client disconnected. (a8a75934-e61d-48d4-bf82-87160f8d8aab)
+2025-12-08 18:43:06,968 Session timed out: a8a75934-e61d-48d4-bf82-87160f8d8aab
+2025-12-09 02:24:15,030 New modbus session from 172.19.0.1 (415a9c3a-5604-4cfa-913b-b39a03553768)
+2025-12-09 02:24:15,438 New Modbus connection from 172.19.0.1:50068. (415a9c3a-5604-4cfa-913b-b39a03553768)
+2025-12-09 02:24:15,447 Modbus client disconnected. (415a9c3a-5604-4cfa-913b-b39a03553768)
+2025-12-09 02:24:47,823 Session timed out: 415a9c3a-5604-4cfa-913b-b39a03553768
+2025-12-09 03:42:26,930 New modbus session from 172.19.0.1 (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:26,998 New Modbus connection from 172.19.0.1:55986. (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:27,121 Function 43 can not be broadcasted
+2025-12-09 03:42:27,780 Modbus traffic from 172.19.0.1: {'request': b'000000000005002b0e0200', 'slave_id': 0, 'function_code': None, 'response': b''} (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:27,904 Modbus connection terminated with client 172.19.0.1.
+2025-12-09 03:42:28,274 New Modbus connection from 172.19.0.1:55084. (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:28,322 Modbus traffic from 172.19.0.1: {'request': b'0000000000020111', 'slave_id': 1, 'function_code': 17, 'response': b'11110101ff'} (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:28,344 Modbus response sent to 172.19.0.1
+2025-12-09 03:42:28,509 Modbus client disconnected. (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:28,637 New Modbus connection from 172.19.0.1:55100. (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:28,898 Modbus traffic from 172.19.0.1: {'request': b'000000000005012b0e0100', 'slave_id': 1, 'function_code': 43, 'response': b'2b0e010100000300075369656d656e73010753494d41544943020653372d323030'} (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:28,899 Modbus response sent to 172.19.0.1
+2025-12-09 03:42:29,058 Modbus client disconnected. (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:29,207 New Modbus connection from 172.19.0.1:55102. (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:34,693 New Modbus connection from 172.19.0.1:55106. (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:40,122 New Modbus connection from 172.19.0.1:60584. (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:45,463 New Modbus connection from 172.19.0.1:60600. (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:50,866 New Modbus connection from 172.19.0.1:51030. (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 03:42:56,276 New Modbus connection from 172.19.0.1:51032. (f7f153e4-8e12-4385-bad8-d38e49fd13f2)
+2025-12-09 12:00:00 Function 43 can not be broadcasted

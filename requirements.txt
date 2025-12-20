@@ -1,0 +1,10 @@
+numpy
+pandas
+joblib
+torch
+scikit-learn
+tensorboard
+psutil
+pymodbus
+requests
+re
