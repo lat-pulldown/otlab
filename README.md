@@ -17,7 +17,7 @@ Contains 1 training and 3 testing datasets
 * `mix.csv`: Mix of noise and attack
 * `_tf.csv`: For isolation forest and variate models
 
-## Setup: Evalutating each models
+## Setup: Evalutating models
 **Default dataset:** `mix.csv`  
 
 Change with `-data XX.csv` (`-cyber XX.csv -phys YY.csv` for fusion_test.py)
