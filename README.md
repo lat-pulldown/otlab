@@ -3,7 +3,8 @@
 ---
 
 ## Prerequisite
-Python 3.8+
+Requires Python 3.8+
+
 Install necessary libraries with
 ```
 pip install -r requirements.txt
