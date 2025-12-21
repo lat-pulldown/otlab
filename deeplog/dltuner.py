@@ -35,7 +35,7 @@ def generate_test_data(name, window_size):
     print(f"Loading {name}...")
     try:
         # Assumes data is in the 'data/' folder per your model_test logic
-        df = pd.read_csv('data/' + name, header=None, names=['eid', 'label'])
+        df = pd.read_csv('../data/' + name, header=None, names=['eid', 'label'])
     except FileNotFoundError:
         try:
             df = pd.read_csv(name, header=None, names=['eid', 'label'])
@@ -86,7 +86,7 @@ def evaluate(model, test_data, k, window_size):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-data', default='mix01.csv', type=str)
+    parser.add_argument('-data', default='../data/mix.csv', type=str)
     parser.add_argument('-window_size', default=10, type=int) 
     args = parser.parse_args()
 

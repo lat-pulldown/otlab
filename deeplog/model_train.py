@@ -16,12 +16,12 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # *** CONFIGURATION ***
 # Ensure this matches your max EID + 1 or a safe buffer
 NUM_CLASSES = 100
-INPUT_FILE = 'train01.csv' 
+INPUT_FILE = 'train.csv' 
 
 def generate(name, window_size):
     print(f"Loading {name}...")
     try:
-        path = os.path.join('data', name)
+        path = os.path.join('../data', name)
         df = pd.read_csv(path, header=None)
     except FileNotFoundError:
         print(f"Error: File {path} not found.")

@@ -14,12 +14,12 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # *** CONFIGURATION ***
 NUM_CLASSES = 100 
-PREDICT_FILE = 'mix01.csv'
+PREDICT_FILE = 'mix.csv'
 
 def generate_test_data(name):
     print(f"Loading {name}...")
     try:
-        df = pd.read_csv('data/' + name, header=None, names=['eid', 'label'])
+        df = pd.read_csv('../data/' + name, header=None, names=['eid', 'label'])
     except FileNotFoundError:
         print(f"Error: File data/{name} not found.")
         return []
@@ -64,7 +64,7 @@ if __name__ == '__main__':
     parser.add_argument('-window_size', default=10, type=int)
     parser.add_argument('-num_candidates', default=2, type=int) 
     # NEW: Add the data argument
-    parser.add_argument('-data', default='mix2.csv', type=str, help='Filename of the test data inside data/ folder')
+    parser.add_argument('-data', default='../data/mix.csv', type=str, help='Filename of the test data inside data/ folder')
     
     args = parser.parse_args()
     num_layers = args.num_layers

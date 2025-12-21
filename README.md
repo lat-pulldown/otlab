@@ -7,7 +7,7 @@ Requires Python 3.8+
 
 Install necessary libraries with
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Dataset
@@ -21,7 +21,7 @@ Contains 1 training and 3 testing datasets
 ## Setup: Evalutating models
 **Default dataset:** `mix.csv`  
 
-Change with `-data XX.csv` (`-cyber XX.csv -phys YY.csv` for fusion_test.py)
+Change with `-data ../data/XX.csv` (`-cyber ../data/XX.csv -phys ../data/YY.csv` for fusion_test.py)
 
 ### 1. Isolation Forest
 - Navigate to the directory:
@@ -70,4 +70,5 @@ Change with `-data XX.csv` (`-cyber XX.csv -phys YY.csv` for fusion_test.py)
 ## Citation
 - DeepLog - [wuyifan18/DeepLog](https://github.com/wuyifan18/DeepLog)
 - Conpot - [mushorg/conpot](https://github.com/mushorg/conpot)
-- Caldera - [mitre/caldera](https://github.com/mitre/caldera), with OT-Plugins - [mitre/caldera-ot](https://github.com/mitre/caldera-ot)
+- Thingsboard - [thingsboard/thingsboard](https://github.com/thingsboard/thingsboard)
+- Caldera - [mitre/caldera](https://github.com/mitre/caldera), OT-Plugins - [mitre/caldera-ot](https://github.com/mitre/caldera-ot)

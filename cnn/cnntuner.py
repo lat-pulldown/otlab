@@ -124,7 +124,7 @@ def tune_cnn(test_data, model):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('-data', default='mix01.csv')
+    parser.add_argument('-data', default='../data/mix.csv')
     args = parser.parse_args()
 
     data = load_test_data(args.data, WINDOW_SIZE)

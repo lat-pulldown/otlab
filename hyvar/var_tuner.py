@@ -121,7 +121,7 @@ def tune(model, inputs, targets, labels):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('-data', default='mix_tf01.csv')
+    parser.add_argument('-data', default='../data/mix_tf.csv')
     args = parser.parse_args()
 
     inputs, targets, labels = load_data(args.data, WINDOW_SIZE)

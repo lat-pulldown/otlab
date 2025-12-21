@@ -85,7 +85,7 @@ def load_data(filename, window_size):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-data', default='mix_tf01.csv')
+    parser.add_argument('-data', default='../data/mix_tf.csv')
     parser.add_argument('-window_size', default=10, type=int)
     parser.add_argument('-hidden_size', default=64, type=int)
     parser.add_argument('-threshold', default=OPTIMAL_THRESHOLD, type=float)

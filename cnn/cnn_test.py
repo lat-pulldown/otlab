@@ -75,7 +75,7 @@ def load_test_data(name, window_size):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     # Defaults to mix01.csv and your optimal threshold
-    parser.add_argument('-data', default='mix01.csv')
+    parser.add_argument('-data', type=str, default='../data/mix.csv')
     parser.add_argument('-threshold', default=0.00010, type=float)
     args = parser.parse_args()
 

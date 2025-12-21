@@ -125,8 +125,8 @@ def load_data(cyber_file, phys_file):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     # New Arguments
-    parser.add_argument('-cyber', default='mix01.csv', help="Cyber log dataset filename")
-    parser.add_argument('-phys', default='mix_tf01.csv', help="Physical sensor dataset filename")
+    parser.add_argument('-cyber', default='../data/mix.csv', help="Cyber log dataset filename")
+    parser.add_argument('-phys', default='../data/mix_tf.csv', help="Physical sensor dataset filename")
     
     # Tuning Arguments
     parser.add_argument('-k', default=2, type=int, help="Top-K for Cyber Model")

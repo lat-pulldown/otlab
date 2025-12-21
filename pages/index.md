@@ -1,16 +1,15 @@
-# Research Objective
-This research establishes a comprehensive framework for emulating industrial environments to collect realistic OT (Operational Technology) communication logs and evaluate machine learning models for real-time anomaly detection. By integrating automated attack emulation `Caldera` with a virtualized industrial target `Conpot`, the system generates high-fidelity datasets that represent both normal operations and diverse cyber-attack scenarios. The framework serves as a standardized benchmarking platform to assess how different deep learning architectures handle the strict accuracy and low-latency requirements essential for protecting critical infrastructure.   
-## The Objective
-The primary objective is to bridge the gap between IT and OT security by:
-- Creating a Realistic Testbed: Establishing a reproducible environment to collect authentic industrial logs that reflect cyber-physical correlations.  
-- Benchmarking Deep Learning Models: Evaluating various architectures - `Isolation Forest`, `1D-CNN`, `DeepLog`, and `CNN-Transformer Hybrid` - to determine which provides the best balance of detection accuracy, latency, and computational intesity required for critical infrastructure.  
-- Cyber-Physical Correlation: Provide a unified dashboard `Thingsboard`, to visualize network attack intensity alongside physical data to better understand the potential impact of cyber events on physical assets.
+## Research Overview
+This research aims to establish a framework for emulating industrial environments to collect realistic OT (Operational Technology) communication logs and evaluate machine learning models for real-time anomaly detection. By integrating automated attack emulation `Caldera` with a virtualized industrial target `Conpot`, the system generates high-fidelity datasets that represent both normal operations and diverse cyber-attack scenarios. The framework serves as a standardized benchmarking platform to assess how different deep learning architectures handle the strict accuracy and low-latency requirements essential for protecting critical infrastructure.   
+## Objectives
+- **Creating a Realistic Testbed:** To establish a reproducible environment to collect authentic industrial logs.  
+- **Benchmarking Deep Learning Models:** To evaluat various architectures - `Isolation Forest`, `1D-CNN`, `DeepLog`, and `CNN-Transformer Hybrid` - to determine which provides the best balance of detection accuracy, latency, and computational load for critical infrastructure.  
+- **Cyber-Physical Visualization and Modeling:** To provide a dashboard `Thingsboard`, to visualize network attack intensity alongside physical data to better understand the potential impact of cyber events on physical assets. To implement a `CNN-Transformer Hybrid` model that performs feature fusion across multi-domain datasets to improve detection accuracy and interpret cyber-physical correlation.
 
 **Visit [here](https://github.com/lat-pulldown/otlab) for the GitHub Repo.**
 
 ---
 
-## Research Walkthrough
+## Walkthrough
 Watch this screen recording to see the full flow of log generation, alignment, and model prediction.
 
 <video width="100%" controls>
@@ -34,7 +33,8 @@ The system spans two environments. Ensure they are on the same network subnet to
 ### 1. Getting Started
 #### 1.1. Prerequisites
 - This setup guide is for macOS (Apple Silicon).
-- Also works with intel macbooks and Windows PC (Each commands may be different).  
+- Also works with Intel Macs and Windows PC (Each commands may be different).  
+  
 #### 1.2. Install [Python](https://www.python.org/downloads/)
 #### 1.3. Clone [Github Repo](https://github.com/lat-pulldown/otlab)
 ```
@@ -43,38 +43,41 @@ git clone https://github.com/lat-pulldown/otlab.git
 
 ### 2. Virtual Machine Configuration
 #### 2.1. Install [Multipass](https://canonical.com/multipass)
-#### Import OVA to Multipass (VM name: dmz, OVA name: cloud-config.yaml)
+#### Import `dmz_env.tar.gz` to Multipass (Default VM name: dmz)
 ```
-multipass launch --name dmz --cloud-init cloud-config.yaml
+multipass import dmz_env.tar.gz --name dmz
 ```
-#### 2.2. Check VM IP Address (We will need this later)
+#### 2.2. Varify the import
 ```
 multipass list
 ```
-and 
+#### 2.3. Check VM IP Address (We will need this later)
 ```
 multipass info dmz
 ```
-#### 2.3. Start VM
+#### 2.4. Start VM
 ```
 multipass start dmz
 ``` 
+#### 2.5. Enter the shell
 ```
 multipass shell dmz
 ```
-*Which one?
-#### 2.4. Launch Conpot and Thingsboard
+#### 2.6. (Once inside the shell...) Launch Conpot, Caldera and Thingsboard
 ```
 sudo ~/start.sh
 ```
 `sudo ~/stop.sh` to stop
-#### 2.5. Open Thingsboard WebUI
-Visit http://YOUR_VM_IP:8080  
-#### 2.6. Open Caldera-OT
+#### 2.6. Open Thingsboard WebUI
+Visit http://YOUR_VM_IP:8080 in your local environment
+#### 2.7. Open Caldera
 ```
-python server.py
+cd caldera && source caldera-env/bin/activate
 ```
-Visit http://YOUR_VM_IP:8888/login  
+```
+python3 server.py
+```
+Visit http://YOUR_VM_IP:8888/login in your local environment  
 
 ### 3. Local Machine Setup
 #### 3.1. Navigate to otlab
@@ -83,12 +86,11 @@ cd otlab
 ```
 #### 3.2. Python libarary dependencies
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 #### 3.3. Mount folder to transfer logs from Conpot to Local  
 ```
-mkdir otlab/logshare
-cd logshare
+mkdir otlab/logshare && cd logshare
 multipass mount ./logshare dmz:/home/ubuntu/shared
 ```	
 
@@ -97,7 +99,7 @@ multipass mount ./logshare dmz:/home/ubuntu/shared
 ## Execution Steps
 
 ### 1. Log Generation
-#### 1.1. Normal Log (For Training)
+#### 1.1. Normal Log for Training (Insert your VM IP to `robust_polling.py` @line 6)
 **In local environment...**  
 1.1.1. Run Normal Polling script
 ```
@@ -173,7 +175,7 @@ sudo mv /home/ubuntu/conpot/logs/attack.log /home/ubuntu/shared
 ```
 #### 1.4. Mix Log
 **In local environment...**  
-1.4.1. Put `pure_noise.log` and `pure_attack.log` under `/script`  
+1.4.1. Put `normal.log`, `pure_noise.log`, and `pure_attack.log` under `/script`  
 1.4.2. Run logmixer.py
 ```
 cd /otlab/script
@@ -188,16 +190,15 @@ python3 aligner.py pre_mix.log mix.log
 ### 2. Thingsboard
 #### 2.1. Send temperature data to Thingsboard
 **In local environment...**  
-Send tempurature via `temp.csv` taken from a thermal camera
+Send tempurature via `temp.csv` taken from a thermal camera (Copy your ACCESS TOKEN from Thingsboard to `camera_replay.py` @line 13)
 ```
 cd /otlab/templog
 python3 camera_replay.py
 ```
 **In VM environment...**  
-#### 2.2. Send Conpot logs in real-time
+#### 2.2. Send Conpot logs in real-time (Copy your ACCESS TOKEN from Thingsboard to `pottotb.py` @line 11)
 ```
-cd /home/ubuntu
-python pottotb.py
+cd /home/ubuntu && python3 pottotb.py
 ```  
 
 ### 3. Preprocessor  
@@ -231,15 +232,15 @@ python3 iforest.py -mode train
 ```	
 Test for `noise_tf01.csv`
 ```
-python3 iforest.py -mode test -data noise_tf01.csv		
+python3 iforest.py -mode test -data ../data/noise_tf.csv		
 ```	
 Test for `attack_tf01.csv`
 ```
-python3 iforest.py -mode test -data attack_tf01.csv		
+python3 iforest.py -mode test -data ../data/attack_tf.csv		
 ```
 Test for `mix.csv`
 ```
-python3 iforest.py -mode test -data mix_tf01.csv		
+python3 iforest.py -mode test -data ../data/mix_tf.csv		
 ```		
 #### 4.2. 1D-CNN
 ```
@@ -251,15 +252,15 @@ python3 cnn_train.py
 ```	
 Test for `noise.csv`
 ```
-python3 cnn.py -mode test -data noise.csv		
+python3 cnn.py -mode test -data ../data/noise.csv		
 ```	
 Test for `attack.csv`
 ```
-python3 cnn.py -mode test -data attack.csv		
+python3 cnn.py -mode test -data ../data/attack.csv		
 ```	
 Test for `mix.csv`
 ```
-python3 cnn.py -mode test -data mix.csv		
+python3 cnn.py -mode test -data ../data/mix.csv		
 ```
 #### 4.3. DeepLog ([GitHub](https://github.com/wuyifan18/DeepLog))
 ```
@@ -271,15 +272,15 @@ python3 model_train.py
 ```	
 Test for `noise.csv`
 ```
-python3 model_test.py -mode test -data noise.csv		
+python3 model_test.py -mode test -data ../data/noise.csv		
 ```
 Test for `attack.csv`
 ```
-python3 model_test.py -mode test -data attack.csv		
+python3 model_test.py -mode test -data ../data/attack.csv		
 ```
 Test for `mix.csv`
 ```
-python3 model_test.py -mode test -data mix.csv		
+python3 model_test.py -mode test -data ../data/mix.csv		
 ```
 #### 4.4. Hybrid Variate
 ```
@@ -292,15 +293,15 @@ python3 hybrid_train.py
 ```
 Test for `noise.csv`
 ```
-python3 hybrid_test.py -mode test -data noise.csv		
+python3 hybrid_test.py -mode test -data ../data/noise.csv		
 ```
 Test for `attack.csv`
 ```
-python3 hybrid_test.py -mode test -data attack.csv		
+python3 hybrid_test.py -mode test -data ../data/attack.csv		
 ```
 Test for `mix.csv`
 ```
-python3 hybrid_test.py -mode test -data mix.csv		
+python3 hybrid_test.py -mode test -data ../data/mix.csv		
 ```
 ##### 4.4.2. Temperature-Variate
 Train
@@ -309,26 +310,26 @@ python3 var_train.py
 ```
 Test for `noise_tf01.csv`
 ```
-python3 var_test.py -mode test -data noise_tf01.csv		
+python3 var_test.py -mode test -data ../data/noise_tf.csv		
 ```
 Test for `attack_tf01.csv`
 ```
-python3 var_test.py -mode test -data attack_tf01.csv		
+python3 var_test.py -mode test -data ../data/attack_tf.csv		
 ```
 Test for `mix_tf01.csv`
 ```
-python3 var_test.py -mode test -data mix_tf01.csv		
+python3 var_test.py -mode test -data ../data/mix_tf.csv		
 ```
 ##### 4.4.3. Correlation Test
 Test for `noise.csv`, `noise_tf01.csv`
 ```
-python3 fusion_test.py -cyber noise.csv -phys noise_tf01.csv	
+python3 fusion_test.py -cyber ../data/noise.csv -phys ../data/noise_tf.csv	
 ```
 Test for `attack.csv`, `attack_tf01.csv`
 ```
-python3 fusion_test.py -cyber attack.csv -phys attack_tf01.csv	
+python3 fusion_test.py -cyber ../data/attack.csv -phys ../data/attack_tf.csv	
 ```
 Test for `mix.csv`, `mix_tf01.csv`
 ```
-python3 fusion_test.py -cyber mix.csv -phys mix_tf01.csv	
+python3 fusion_test.py -cyber ../data/mix.csv -phys ../data/mix_tf.csv	
 ```

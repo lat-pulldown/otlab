@@ -15,7 +15,7 @@ from sklearn.preprocessing import StandardScaler
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # *** CONFIGURATION ***
-INPUT_FILE = 'train_tf01.csv' 
+INPUT_FILE = '../data/train_tf.csv' 
 FEATURE_COLS = ['eid_count', 'eid_nunique', 'temperature']
 WINDOW_SIZE = 10
 SCALER_PATH = 'model/multivar_scaler.pkl'

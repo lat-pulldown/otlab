@@ -99,7 +99,7 @@ if __name__ == "__main__":
     parser.add_argument('-hidden_size', default=64, type=int)
     parser.add_argument('-window_size', default=10, type=int)
     parser.add_argument('-num_candidates', default=2, type=int)
-    parser.add_argument('-data', default='mix_01.csv', type=str)
+    parser.add_argument('-data', default='../data/mix.csv', type=str)
     
     args = parser.parse_args()
     model_path = 'model/hybrid_model.pth'

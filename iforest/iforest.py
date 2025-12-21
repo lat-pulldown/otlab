@@ -13,8 +13,8 @@ from sklearn.preprocessing import StandardScaler
 MODEL_PATH = 'model/iforest_model.pkl'
 SCALER_PATH = 'model/iforest_scaler.pkl'
 # Isolation Forest MUST use the _tf (feature) dataset, not the _dl (sequence) dataset
-TRAIN_FILE = 'data/train_tf01.csv' 
-DATA_DIR = 'data'
+TRAIN_FILE = '../data/train_tf.csv' 
+DATA_DIR = '../data'
 
 # Define the numerical features we want to learn from
 FEATURE_COLS = ['eid_count', 'eid_nunique', 'temperature']
@@ -164,7 +164,7 @@ def test(input_file):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-mode', type=str, required=True, choices=['train', 'test'])
-    parser.add_argument('-data', type=str, default='data/mix_tf01.csv', help="Data file")
+    parser.add_argument('-data', type=str, default='../data/mix_tf.csv', help="Data file")
     
     args = parser.parse_args()
 

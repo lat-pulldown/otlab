@@ -12,7 +12,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # *** CONFIGURATION ***
 NUM_CLASSES = 100 
-INPUT_FILE = 'train01.csv' 
+INPUT_FILE = '../data/train.csv' 
 
 def generate(name, window_size):
     print(f"Loading {name}...")

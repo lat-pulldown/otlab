@@ -47,7 +47,7 @@ def tune(train_file, test_file):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('-train', default='data/train_tf01.csv')
-    parser.add_argument('-data', default='data/mix_tf01.csv')
+    parser.add_argument('-train', default='../data/train_tf.csv')
+    parser.add_argument('-data', default='../data/mix_tf.csv')
     args = parser.parse_args()
     tune(args.train, args.data)
