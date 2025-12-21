@@ -1,5 +1,5 @@
-title: otlab User Manual
+title: otlab - User Manual
 description: Setup and how to run it
-theme: jekyll-theme-midnight
+theme: jekyll-theme-primer
 markdown: kramdown
 highlighter: rouge
