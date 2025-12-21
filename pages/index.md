@@ -1,10 +1,10 @@
 # Research Objective
-This research establishes a comprehensive framework for emulating industrial environments to collect realistic OT (Operational Technology) communication logs and evaluate machine learning models for real-time anomaly detection. By integrating automated attack emulation (Caldera) with a virtualized industrial target (Conpot), the system generates high-fidelity datasets that represent both normal operations and diverse cyber-attack scenarios. The framework serves as a standardized benchmarking platform to assess how different deep learning architectures handle the strict accuracy and low-latency requirements essential for protecting critical infrastructure.   
+This research establishes a comprehensive framework for emulating industrial environments to collect realistic OT (Operational Technology) communication logs and evaluate machine learning models for real-time anomaly detection. By integrating automated attack emulation `Caldera` with a virtualized industrial target `Conpot`, the system generates high-fidelity datasets that represent both normal operations and diverse cyber-attack scenarios. The framework serves as a standardized benchmarking platform to assess how different deep learning architectures handle the strict accuracy and low-latency requirements essential for protecting critical infrastructure.   
 ## The Objective
 The primary objective is to bridge the gap between IT and OT security by:
 - Creating a Realistic Testbed: Establishing a reproducible environment to collect authentic industrial logs that reflect cyber-physical correlations.  
-- Benchmarking Deep Learning Models: Evaluating various architectures (Isolation Forest, 1D-CNN, DeepLog, and a Hybrid CNN-Transformer) to determine which provides the best balance of detection accuracy, latency, and computational intesity required for critical infrastructure.  
-- Cyber-Physical Correlation: Provide a unified dashboard (Thingsboard), to visualize network attack intensity alongside physical data to better understand the potential impact of cyber events on physical assets.
+- Benchmarking Deep Learning Models: Evaluating various architectures - `Isolation Forest`, `1D-CNN`, `DeepLog`, and `CNN-Transformer Hybrid` - to determine which provides the best balance of detection accuracy, latency, and computational intesity required for critical infrastructure.  
+- Cyber-Physical Correlation: Provide a unified dashboard `Thingsboard`, to visualize network attack intensity alongside physical data to better understand the potential impact of cyber events on physical assets.
 
 **Visit [here](https://github.com/lat-pulldown/otlab) for the GitHub Repo.**
 
@@ -34,7 +34,7 @@ The system spans two environments. Ensure they are on the same network subnet to
 ### 1. Getting Started
 #### 1.1. Prerequisites
 - This setup guide is for macOS (Apple Silicon).
-- Also works with intel macbooks and Windows PC (Each commands may be different).
+- Also works with intel macbooks and Windows PC (Each commands may be different).  
 #### 1.2. Install [Python](https://www.python.org/downloads/)
 #### 1.3. Clone [Github Repo](https://github.com/lat-pulldown/otlab)
 ```
@@ -69,12 +69,12 @@ sudo ~/start.sh
 ```
 `sudo ~/stop.sh` to stop
 #### 2.5. Open Thingsboard WebUI
-Visit http://YOUR VM IP:8080  
+Visit http://YOUR_VM_IP:8080  
 #### 2.6. Open Caldera-OT
 ```
 python server.py
 ```
-Visit http://YOUR VM IP:8888/login  
+Visit http://YOUR_VM_IP:8888/login  
 
 ### 3. Local Machine Setup
 #### 3.1. Navigate to otlab
@@ -123,7 +123,7 @@ sudo mv /home/ubuntu/conpot/logs/nomral.log /home/ubuntu/shared
 cd /otlab/script
 python3 robust_polling.py
 ```
-1.2.2. Open Port:502 and open SSH Tunnel (In new terminal)
+1.2.2. Open Port:502 and open SSH Tunnel (In a new terminal)
 ```
 sudo ssh -i /var/root/Library/Application\ Support/multipassd/ssh-keys/id_rsa -L 0.0.0.0:50502:localhost:502 ubuntu@<YOUR VM IP>
 ```
@@ -261,7 +261,7 @@ Test for `mix.csv`
 ```
 python3 cnn.py -mode test -data mix.csv		
 ```
-#### 4.3. DeepLog
+#### 4.3. DeepLog ([GitHub](https://github.com/wuyifan18/DeepLog))
 ```
 cd /otlab/deeplog
 ```	
