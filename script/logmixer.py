@@ -146,7 +146,7 @@ def mix_three_logs(normal_file, attack_file, noise_file, output_file):
 normal_log_path = 'normal.log'
 attack_log_path = 'pure_attack.log'
 noise_log_path = 'pure_noise.log'
-output_log_path = 'attack.log'
+output_log_path = 'pre_mix.log'
 
 # --- Run Configuration ---
 if __name__ == "__main__":

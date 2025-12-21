@@ -67,3 +67,7 @@ Change with `-data XX.csv` (`-cyber XX.csv -phys YY.csv` for fusion_test.py)
 ## Evaluation Results
 ![](eval_report.png)
 
+## Citation
+- DeepLog - [wuyifan18/DeepLog](https://github.com/wuyifan18/DeepLog)
+- Conpot - [mushorg/conpot](https://github.com/mushorg/conpot)
+- Caldera - [mitre/caldera](https://github.com/mitre/caldera), with OT-Plugins - [mitre/caldera-ot](https://github.com/mitre/caldera-ot)
