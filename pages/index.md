@@ -1,9 +1,16 @@
-# OTLab: Modbus Honeypot & Anomaly Detection
-Welcome to the setup guide for the OTLab research project. This system integrates a **Conpot Honeypot**, **Caldera Bot** for attack simulation, and a **DeepLog-based LSTM model** for anomaly detection. Visit [here](https://github.com/lat-pulldown/otlab) for the GitHub Repo.
+# Research Objective
+This research establishes a comprehensive framework for emulating industrial environments to collect realistic OT (Operational Technology) communication logs and evaluate machine learning models for real-time anomaly detection. By integrating automated attack emulation (Caldera) with a virtualized industrial target (Conpot), the system generates high-fidelity datasets that represent both normal operations and diverse cyber-attack scenarios. The framework serves as a standardized benchmarking platform to assess how different deep learning architectures handle the strict accuracy and low-latency requirements essential for protecting critical infrastructure.   
+## The Objective
+The primary objective is to bridge the gap between IT and OT security by:
+- Creating a Realistic Testbed: Establishing a reproducible environment to collect authentic industrial logs that reflect cyber-physical correlations.  
+- Benchmarking Deep Learning Models: Evaluating various architectures (Isolation Forest, 1D-CNN, DeepLog, and a Hybrid CNN-Transformer) to determine which provides the best balance of detection accuracy, latency, and computational intesity required for critical infrastructure.  
+- Cyber-Physical Correlation: Provide a unified dashboard (Thingsboard), to visualize network attack intensity alongside physical data to better understand the potential impact of cyber events on physical assets.
+
+**Visit [here](https://github.com/lat-pulldown/otlab) for the GitHub Repo.**
 
 ---
 
-## Project Walkthrough
+## Research Walkthrough
 Watch this screen recording to see the full flow of log generation, alignment, and model prediction.
 
 <video width="100%" controls>
@@ -16,8 +23,9 @@ Watch this screen recording to see the full flow of log generation, alignment, a
 ## System Topology
 The system spans two environments. Ensure they are on the same network subnet to allow Modbus communication.
 
-* **Local Machine (macOS):** Runs the `robust_polling.py` (normal traffic) and `model_test.py` (AI detection).
-* **Virtual Machine (Ubuntu/Linux):** Runs the `Conpot` Honeypot and `caldera_bot`.
+* **Local Machine (macOS/Windows):** Runs the Preprocessor, Caldera, and the Deep-Learning Models.  
+* **Virtual Machine (Ubuntu/Linux):** Runs the ISC Honeypot `Conpot` and IoT Platform `Thingsboard`.  
+* **Physical OT Device:** Optional. The example Temperature data `temp.csv` is from a Thermal Camera ([OMRON K6PM](https://automation.omron.com/en/us/products/family/K6PM/k6pm-thmd-eip)). If connecting in real-time, be sure they are in the same network.  
 
 ---
 
@@ -43,6 +51,10 @@ multipass launch --name dmz --cloud-init cloud-config.yaml
 ```
 multipass list
 ```
+and 
+```
+multipass info dmz
+```
 #### 2.3. Start VM
 ```
 multipass start dmz
@@ -50,7 +62,19 @@ multipass start dmz
 ```
 multipass shell dmz
 ```
-**Which one?
+*Which one?
+#### 2.4. Launch Conpot and Thingsboard
+```
+sudo ~/start.sh
+```
+`sudo ~/stop.sh` to stop
+#### 2.5. Open Thingsboard WebUI
+Visit http://YOUR VM IP:8080  
+#### 2.6. Open Caldera-OT
+```
+python server.py
+```
+Visit http://YOUR VM IP:8888/login  
 
 ### 3. Local Machine Setup
 #### 3.1. Navigate to otlab
@@ -101,10 +125,14 @@ python3 robust_polling.py
 ```
 1.2.2. Open Port:502 and open SSH Tunnel (In new terminal)
 ```
-sudo ssh -i /var/root/Library/Application\ Support/multipassd/ssh-keys/id_rsa -L 0.0.0.0:50502:localhost:502 ubuntu@<CONPOT VM IP>
+sudo ssh -i /var/root/Library/Application\ Support/multipassd/ssh-keys/id_rsa -L 0.0.0.0:50502:localhost:502 ubuntu@<YOUR VM IP>
 ```
 **In VM environment...**  
-1.2.3. Move log from Conpot to Local
+1.2.3. Check if Port 502 is open
+```
+nc -zv <YOUR VM IP> 502
+```
+1.2.4. Move log from Conpot to Local
 ```
 sudo mv /home/ubuntu/conpot/logs/conpot.log /home/ubuntu/conpot/logs/noise.log
 ```
@@ -130,7 +158,7 @@ python3 server.py
 1.3.3. Open WebUI at [http://localhost:8080](http://localhost:8080)  
 1.3.4. Create Agent  
 1.3.5. Create Operations and run it  
-**Local or inside VM???  
+*Local or inside VM???
 **In VM environment...**  
 1.3.5. Move log from Conpot to Local
 ```
