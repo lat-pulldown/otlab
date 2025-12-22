@@ -43,52 +43,85 @@ git clone https://github.com/lat-pulldown/otlab.git
 
 ### 2. Virtual Machine Configuration
 #### 2.1. Install [Multipass](https://canonical.com/multipass)
-#### Import `dmz_env.tar.gz` to Multipass (Default VM name: dmz)
+From Homebrew Terminal
 ```
-multipass import dmz_env.tar.gz --name dmz
+brew install --cask multipass
 ```
-#### 2.2. Varify the import
+Verify with `multipass version` and `multipass list`
+#### 2.2. Create a VM (We will name it dmz)
 ```
-multipass list
+multipass launch 22.04 \
+  --name dmz \
+  --cpus 4 \
+  --memory 8G \
+  --disk 40G
 ```
-#### 2.3. Check VM IP Address (We will need this later)
-```
-multipass info dmz
-```
-#### 2.4. Start VM
-```
-multipass start dmz
-``` 
-#### 2.5. Enter the shell
+#### 2.4. Enter the shell
 ```
 multipass shell dmz
 ```
-#### 2.6. (Once inside the shell...) Launch Conpot, Caldera and Thingsboard
+`multipass stop dmz` to stop, `multipass start dmz` to start again.
+#### 2.5. (Once inside the shell...) Clone Github
 ```
-sudo ~/start.sh
+git clone https://github.com/lat-pulldown/otlab.git
 ```
-`sudo ~/stop.sh` to stop
-#### 2.6. Open Thingsboard WebUI
-Visit http://YOUR_VM_IP:8080 in your local environment
-#### 2.7. Open Caldera
+#### 2.6. Delete unnecessary folders and files
 ```
-cd caldera && source caldera-env/bin/activate
+rm -rf eval_report.png README.md requirements.txt preprocessor data templog cnn deeplog hyvar iforest pages
 ```
+#### 2.7. Build Conpot, Thingsboard, and Caldera (all at once)
 ```
-python3 server.py
+chmod +x setup_dmz_full.sh
+./setup_dmz_full.sh
 ```
-Visit http://YOUR_VM_IP:8888/login in your local environment  
+For individual setup use `setup_dmz_conpot`, `setup_dmz_tb`, or `setup_dmz_caldera`. Make sure to use `chmod +x setup_dmz_xxxx.sh`.
+#### 2.8. Open Thingsboard WebUI
+1. Visit http://YOUR_VM_IP:8080 in your local environment 
+2. Log in as usr:`tenant@thingsboard.org` pass: `tenant`
+3. Create Device
+4. Copy Access Token
+#### 2.9. Change Conpot
+1. Edit ~conpot/conpot/testing.cfg 
+Create `http_json` and `modbus`
+```
+[http_json]
+enabled = True
+host = <DMZ_IP>
+port = 8080
+url = /api/v1/<DEVICE_ACCESS_TOKEN>/telemetry
+method = POST
+interval = 5
+
+[modbus]
+enabled = True
+```
+2. Create copy the new xml file
+```
+cd ~/conpot
+docker cp new_modbus.xml conpot:/usr/local/lib/python3.8/site-packages/conpot/templates/default/modbus/modbus.xml
+```
+#### 2.10. Open Caldera WebUI
+Visit http://YOUR_VM_IP:8888 in your local environment
+#### 2.11. To launch Conpot, Thingsboard, and Caldera
+```
+make start
+```
+`make stop` to stop
 
 ### 3. Local Machine Setup
 #### 3.1. Navigate to otlab
 ```
 cd otlab
 ```
-#### 3.2. Python libarary dependencies
+#### 3.2. Delete files not necessary for local environment
+```
+rm -rf setup_dmz_full.sh setup_dmz_conpot.sh setup_dmz_tb.sh setup_dmz_caldera.sh start.sh stop.sh
+```
+#### 3.3. Python libarary dependencies
 ```
 pip3 install -r requirements.txt
 ```
-#### 3.3. Mount folder to transfer logs from Conpot to Local  
+#### 3.4. Mount folder to transfer logs from Conpot to Local  
 ```
 mkdir otlab/logshare && cd logshare
 multipass mount ./logshare dmz:/home/ubuntu/shared
@@ -199,9 +232,9 @@ cd /otlab/templog
 python3 camera_replay.py
 ```
 **In VM environment...**  
-#### 2.2. Send Conpot logs in real-time (Copy your ACCESS TOKEN from Thingsboard to `pottotb.py` @line 11)
+#### 2.2. Send Conpot logs in real-time (Copy your VM_IP and DEVICE_ACCESS_TOKEN from Thingsboard to `pottotb.py` @line 10, 11)
 ```
-cd /home/ubuntu && python3 pottotb.py
+cd /home/ubuntu/script && python3 pottotb.py
 ```  
 
 ### 3. Preprocessor  
