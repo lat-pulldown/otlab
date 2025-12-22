@@ -75,7 +75,8 @@ For individual setup use `setup_dmz_conpot`, `setup_dmz_tb`, or `setup_dmz_calde
 1. Visit http://YOUR_VM_IP:8080 in your local environment 
 2. Log in as usr:`tenant@thingsboard.org` pass: `tenant`
 3. Create Device
-4. Copy Access Token
+4. Copy Access Token  
+
 #### 2.8. Change Conpot
 1. Edit ~conpot/conpot/testing.cfg 
 Create `http_json` and `modbus`
@@ -92,7 +93,9 @@ interval = 5
 [modbus]
 enabled = True
 ```
-2. Create copy the new xml file
+
+2. Create copy the new xml file  
+
 ```
 cd ~/conpot
 docker cp new_modbus.xml conpot:/usr/local/lib/python3.8/site-packages/conpot/templates/default/modbus/modbus.xml
