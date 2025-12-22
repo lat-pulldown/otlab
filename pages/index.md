@@ -87,7 +87,8 @@ port = 8080
 url = /api/v1/<DEVICE_ACCESS_TOKEN>/telemetry
 method = POST
 interval = 5
-
+```
+```
 [modbus]
 enabled = True
 ```
@@ -102,7 +103,7 @@ Visit http://YOUR_VM_IP:8888 in your local environment
 ```
 make start
 ```
-`make stop` to stop
+`make stop` to stop  
 
 ### 3. Local Machine Setup
 #### 3.1. Navigate to otlab
@@ -226,7 +227,7 @@ python3 camera_replay.py
 **In VM environment...**  
 #### 2.2. Send Conpot logs in real-time (Copy your VM_IP and DEVICE_ACCESS_TOKEN from Thingsboard to `pottotb.py` @line 10, 11)
 ```
-cd /home/ubuntu/script && python3 pottotb.py
+cd /home/ubuntu && python3 pottotb.py
 ```  
 
 ### 3. Preprocessor  
