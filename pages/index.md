@@ -97,7 +97,11 @@ multipass mount ./logshare dmz:/home/ubuntu/shared
 ---
 
 ## Execution Steps
-
+### 0. Start all VM services (Things starts Conpot, Thingsboard, Caldera, and pottotb.py)
+```
+sudo ~/start.sh
+```
+`sudo ~/stop.sh` to stop all.
 ### 1. Log Generation
 #### 1.1. Normal Log for Training (Insert your VM IP to `robust_polling.py` @line 6)
 **In local environment...**  
@@ -145,23 +149,22 @@ docker compose restart conpot
 ```
 sudo mv /home/ubuntu/conpot/logs/noise.log /home/ubuntu/shared
 ```
-#### 1.3. Attack Log 
-**In local environment...**  
+**In local environment...** 
+#### 1.3. Attack Log  
 1.3.1. Run Normal Polling script (Don't run this for `pure_attack.log`)
 ```
 cd /otlab/script
 python3 robust_polling.py
 ```	
-1.3.2. Start Caldera
+**In VM environment...**  
+1.3.2. Start Caldera (Only if you haven't started it with `sudo ~/start.sh`)
 ```
-cd /otlab
+cd /home/ubuntu/caldera
 python3 server.py
 ```
-1.3.3. Open WebUI at [http://localhost:8080](http://localhost:8080)  
-1.3.4. Create Agent  
+1.3.3. Open WebUI at http://<YOUR_VM_IP>:8888
+1.3.4. Create an Agent  
 1.3.5. Create Operations and run it  
-*Local or inside VM???
-**In VM environment...**  
 1.3.5. Move log from Conpot to Local
 ```
 sudo mv /home/ubuntu/conpot/logs/conpot.log /home/ubuntu/conpot/logs/attack.log
@@ -173,8 +176,8 @@ docker compose restart conpot
 ```
 sudo mv /home/ubuntu/conpot/logs/attack.log /home/ubuntu/shared
 ```
-#### 1.4. Mix Log
 **In local environment...**  
+#### 1.4. Mix Log
 1.4.1. Put `normal.log`, `pure_noise.log`, and `pure_attack.log` under `/script`  
 1.4.2. Run logmixer.py
 ```
@@ -188,8 +191,8 @@ python3 aligner.py pre_mix.log mix.log
 1.4.4. Move the created logs `normal.log` `noise.log` `attack.log` `mix.log` to `/preprocessor`  
 
 ### 2. Thingsboard
-#### 2.1. Send temperature data to Thingsboard
 **In local environment...**  
+#### 2.1. Send temperature data to Thingsboard
 Send tempurature via `temp.csv` taken from a thermal camera (Copy your ACCESS TOKEN from Thingsboard to `camera_replay.py` @line 13)
 ```
 cd /otlab/templog

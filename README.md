@@ -1,4 +1,4 @@
-**Visit [here](https://lat-pulldown.github.io/otlab) for full setup guide.**  
+**Visit [here](https://lat-pulldown.github.io/otlab) for user guide.**  
 
 ---
 
@@ -18,7 +18,7 @@ Contains 1 training and 3 testing datasets
 * `mix.csv`: Mix of noise and attack
 * `_tf.csv`: For isolation forest and variate models
 
-## Setup: Evalutating models
+## Evalutating models
 **Default dataset:** `mix.csv`  
 
 Change with `-data ../data/XX.csv` (`-cyber ../data/XX.csv -phys ../data/YY.csv` for fusion_test.py)
@@ -71,4 +71,5 @@ Change with `-data ../data/XX.csv` (`-cyber ../data/XX.csv -phys ../data/YY.csv`
 - DeepLog - [wuyifan18/DeepLog](https://github.com/wuyifan18/DeepLog)
 - Conpot - [mushorg/conpot](https://github.com/mushorg/conpot)
 - Thingsboard - [thingsboard/thingsboard](https://github.com/thingsboard/thingsboard)
-- Caldera - [mitre/caldera](https://github.com/mitre/caldera), OT-Plugins - [mitre/caldera-ot](https://github.com/mitre/caldera-ot)
+- Caldera - [mitre/caldera](https://github.com/mitre/caldera)
+- Caldera OT-Plugins - [mitre/caldera-ot](https://github.com/mitre/caldera-ot)
