@@ -65,22 +65,18 @@ multipass shell dmz
 ```
 git clone https://github.com/lat-pulldown/otlab.git
 ```
-#### 2.6. Delete unnecessary folders and files
-```
-rm -rf eval_report.png README.md requirements.txt preprocessor data templog cnn deeplog hyvar iforest pages
-```
-#### 2.7. Build Conpot, Thingsboard, and Caldera (all at once)
+#### 2.6. Build Conpot, Thingsboard, and Caldera (all at once)
 ```
 chmod +x setup_dmz_full.sh
 ./setup_dmz_full.sh
 ```
 For individual setup use `setup_dmz_conpot`, `setup_dmz_tb`, or `setup_dmz_caldera`. Make sure to use `chmod +x setup_dmz_xxxx.sh`.
-#### 2.8. Open Thingsboard WebUI
+#### 2.7. Open Thingsboard WebUI
 1. Visit http://YOUR_VM_IP:8080 in your local environment 
 2. Log in as usr:`tenant@thingsboard.org` pass: `tenant`
 3. Create Device
 4. Copy Access Token
-#### 2.9. Change Conpot
+#### 2.8. Change Conpot
 1. Edit ~conpot/conpot/testing.cfg 
 Create `http_json` and `modbus`
 ```
@@ -100,9 +96,9 @@ enabled = True
 cd ~/conpot
 docker cp new_modbus.xml conpot:/usr/local/lib/python3.8/site-packages/conpot/templates/default/modbus/modbus.xml
 ```
-#### 2.10. Open Caldera WebUI
+#### 2.9. Open Caldera WebUI
 Visit http://YOUR_VM_IP:8888 in your local environment
-#### 2.11. To launch Conpot, Thingsboard, and Caldera
+#### 2.10. To launch Conpot, Thingsboard, and Caldera
 ```
 make start
 ```
@@ -113,15 +109,11 @@ make start
 ```
 cd otlab
 ```
-#### 3.2. Delete files not necessary for local environment
-```
-rm -rf setup_dmz_full.sh setup_dmz_conpot.sh setup_dmz_tb.sh setup_dmz_caldera.sh start.sh stop.sh
-```
-#### 3.3. Python libarary dependencies
+#### 3.2. Python libarary dependencies
 ```
 pip3 install -r requirements.txt
 ```
-#### 3.4. Mount folder to transfer logs from Conpot to Local  
+#### 3.3. Mount folder to transfer logs from Conpot to Local  
 ```
 mkdir otlab/logshare && cd logshare
 multipass mount ./logshare dmz:/home/ubuntu/shared
