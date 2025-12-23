@@ -1,11 +1,13 @@
+**Links to Repository: [otlab](https://github.com/lat-pulldown/otlab) (local environment setup), [vm-dmz](https://github.com/lat-pulldown/vm-dmz) (vm environment setup)**
+
 ## Research Overview
 This research aims to establish a framework for emulating industrial environments to collect realistic OT (Operational Technology) communication logs and evaluate machine learning models for real-time anomaly detection. By integrating automated attack emulation `Caldera` with a virtualized industrial target `Conpot`, the system generates high-fidelity datasets that represent both normal operations and diverse cyber-attack scenarios. The framework serves as a standardized benchmarking platform to assess how different deep learning architectures handle the strict accuracy and low-latency requirements essential for protecting critical infrastructure.   
+
+
 ## Objectives
 - **Creating a Realistic Testbed:** To establish a reproducible environment to collect authentic industrial logs.  
 - **Benchmarking Deep Learning Models:** To evaluat various architectures - `Isolation Forest`, `1D-CNN`, `DeepLog`, and `CNN-Transformer Hybrid` - to determine which provides the best balance of detection accuracy, latency, and computational load for critical infrastructure.  
 - **Cyber-Physical Visualization and Modeling:** To provide a dashboard `Thingsboard`, to visualize network attack intensity alongside physical data to better understand the potential impact of cyber events on physical assets. To implement a `CNN-Transformer Hybrid` model that performs feature fusion across multi-domain datasets to improve detection accuracy and interpret cyber-physical correlation.
-
-**Visit [here](https://github.com/lat-pulldown/otlab) for the GitHub Repo.**
 
 ---
 
@@ -22,9 +24,9 @@ Watch this screen recording to see the full flow of log generation, alignment, a
 ## System Topology
 The system spans two environments. Ensure they are on the same network subnet to allow Modbus communication.
 
-* **Local Machine (macOS/Windows):** Runs the Preprocessor, Caldera, and the Deep-Learning Models.  
-* **Virtual Machine (Ubuntu/Linux):** Runs the ISC Honeypot `Conpot` and IoT Platform `Thingsboard`.  
-* **Physical OT Device:** Optional. The example Temperature data `temp.csv` is from a Thermal Camera ([OMRON K6PM](https://automation.omron.com/en/us/products/family/K6PM/k6pm-thmd-eip)). If connecting in real-time, be sure they are in the same network.  
+* **Local Machine (macOS/Windows):** Runs the Preprocessor, scripts, datasets, and the Deep-Learning Models.  
+* **Virtual Machine (Ubuntu/Linux):** Runs the ICS honeypot `Conpot`, IoT platform `Thingsboard`, and attack emulation tool `Caldera`.  
+* **Physical OT Device:** Optional. The example Temperature data `temp.csv` is from a Thermal Camera ([OMRON K6PM](https://automation.omron.com/en/us/products/family/K6PM/k6pm-thmd-eip)). If connecting in real-time, be sure they are in the same network subnet.  
 
 ---
 
@@ -36,10 +38,6 @@ The system spans two environments. Ensure they are on the same network subnet to
 - Also works with Intel Macs and Windows PC (Each commands may be different).  
   
 #### 1.2. Install [Python](https://www.python.org/downloads/)
-#### 1.3. Clone [Github Repo](https://github.com/lat-pulldown/otlab)
-```
-git clone https://github.com/lat-pulldown/otlab.git
-```
 
 ### 2. Virtual Machine Configuration
 #### 2.1. Install [Multipass](https://canonical.com/multipass)
@@ -61,7 +59,7 @@ multipass launch 22.04 \
 multipass shell dmz
 ```
 `multipass stop dmz` to stop, `multipass start dmz` to start again.
-#### 2.5. (Once inside the shell...) Clone Github
+#### 2.5. (Once inside the shell...) Clone Github [vm-dmz](https://github.com/lat-pulldown/vm-dmz)
 ```
 git clone https://github.com/lat-pulldown/vm-dmz.git
 ```
@@ -72,7 +70,7 @@ chmod +x setup_dmz_full.sh
 ```
 For individual setup use `setup_dmz_conpot`, `setup_dmz_tb`, or `setup_dmz_caldera`. Make sure to use `chmod +x setup_dmz_xxxx.sh`.
 #### 2.7. Open Thingsboard WebUI
-1. Visit http://YOUR_VM_IP:8080 in your local environment 
+1. Visit http://VM_IP:8080 in your local environment 
 2. Log in as usr:`tenant@thingsboard.org` pass: `tenant`
 3. Create Device
 4. Copy Access Token  
@@ -83,7 +81,7 @@ Create `http_json` and `modbus`
 ```
 [http_json]
 enabled = True
-host = <DMZ_IP>
+host = <VM_IP>
 port = 8080
 url = /api/v1/<DEVICE_ACCESS_TOKEN>/telemetry
 method = POST
@@ -92,26 +90,28 @@ interval = 5
 ```
 [modbus]
 enabled = True
-```
-
+```  
 2. Copy the new xml file  
-
 ```
 cd ~/conpot
 docker cp new_modbus.xml conpot:/usr/local/lib/python3.8/site-packages/conpot/templates/default/modbus/modbus.xml
 ```
 #### 2.9. Open Caldera WebUI
-Visit http://YOUR_VM_IP:8888 in your local environment
+Visit http://VM_IP:8888 in your local environment
 #### 2.10. To launch Conpot, Thingsboard, and Caldera
 ```
 make start
 ```
 `make stop` to stop  
+#### 2.11. Make a folder for sharing logs with local enviornment
+```
+mkdir ~/shared
+```
 
 ### 3. Local Machine Setup
-#### 3.1. Navigate to otlab
+#### 3.1. Clone [Github Repo](https://github.com/lat-pulldown/otlab)
 ```
-cd otlab
+git clone https://github.com/lat-pulldown/otlab.git && cd otlab
 ```
 #### 3.2. Python libarary dependencies
 ```
@@ -126,13 +126,14 @@ multipass mount ./logshare dmz:/home/ubuntu/shared
 ---
 
 ## Execution Steps
-### 0. Start all VM services (Things starts Conpot, Thingsboard, Caldera, and pottotb.py)
+**In VM environment...** 
+### 0. Start all VM services (Starts Conpot, Thingsboard, Caldera, and pottotb.py)
 ```
 sudo ~/start.sh
 ```
 `sudo ~/stop.sh` to stop all.
 ### 1. Log Generation
-#### 1.1. Normal Log for Training (Insert your VM IP to `robust_polling.py` @line 6)
+#### 1.1. Normal Log for Training (Insert VM_IP to `robust_polling.py` @line 6)
 **In local environment...**  
 1.1.1. Run Normal Polling script
 ```
@@ -160,12 +161,12 @@ python3 robust_polling.py
 ```
 1.2.2. Open Port:502 and open SSH Tunnel (In a new terminal)
 ```
-sudo ssh -i /var/root/Library/Application\ Support/multipassd/ssh-keys/id_rsa -L 0.0.0.0:50502:localhost:502 ubuntu@<YOUR VM IP>
+sudo ssh -i /var/root/Library/Application\ Support/multipassd/ssh-keys/id_rsa -L 0.0.0.0:50502:localhost:502 ubuntu@<VM_IP>
 ```
 **In VM environment...**  
 1.2.3. Check if Port 502 is open
 ```
-nc -zv <YOUR VM IP> 502
+nc -zv <VM_IP> 502
 ```
 1.2.4. Move log from Conpot to Local
 ```
@@ -191,7 +192,7 @@ python3 robust_polling.py
 cd /home/ubuntu/caldera
 python3 server.py
 ```
-1.3.3. Open WebUI at http://<YOUR_VM_IP>:8888
+1.3.3. Open WebUI at http://<VM_IP>:8888
 1.3.4. Create an Agent  
 1.3.5. Create Operations and run it  
 1.3.5. Move log from Conpot to Local
@@ -222,13 +223,13 @@ python3 aligner.py pre_mix.log mix.log
 ### 2. Thingsboard
 **In local environment...**  
 #### 2.1. Send temperature data to Thingsboard
-Send tempurature via `temp.csv` taken from a thermal camera (Copy your ACCESS TOKEN from Thingsboard to `camera_replay.py` @line 13)
+Send tempurature via `temp.csv` taken from a thermal camera (Copy your ACCESS_TOKEN from Thingsboard to `camera_replay.py` @line 13)
 ```
 cd /otlab/templog
 python3 camera_replay.py
 ```
 **In VM environment...**  
-#### 2.2. Send Conpot logs in real-time (Copy your VM_IP and DEVICE_ACCESS_TOKEN from Thingsboard to `pottotb.py` @line 10, 11)
+#### 2.2. Send Conpot logs in real-time (Copy VM_IP and DEVICE_ACCESS_TOKEN from Thingsboard to `pottotb.py` @line 10, 11)
 ```
 cd /home/ubuntu && python3 pottotb.py
 ```  
