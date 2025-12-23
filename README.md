@@ -1,5 +1,7 @@
 **Visit [here](https://lat-pulldown.github.io/otlab) for user guide.**  
 
+For the full setup, use [vm-dmz](https://github.com/lat-pulldown/vm-dmz) with this repo for setting up the virtual machine.
+
 ---
 
 ## Prerequisite

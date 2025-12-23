@@ -63,7 +63,7 @@ multipass shell dmz
 `multipass stop dmz` to stop, `multipass start dmz` to start again.
 #### 2.5. (Once inside the shell...) Clone Github
 ```
-git clone https://github.com/lat-pulldown/otlab.git
+git clone https://github.com/lat-pulldown/vm-dmz.git
 ```
 #### 2.6. Build Conpot, Thingsboard, and Caldera (all at once)
 ```
@@ -94,7 +94,7 @@ interval = 5
 enabled = True
 ```
 
-2. Create copy the new xml file  
+2. Copy the new xml file  
 
 ```
 cd ~/conpot
