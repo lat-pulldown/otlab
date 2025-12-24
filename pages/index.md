@@ -1,5 +1,3 @@
-**Links to Repository: [otlab](https://github.com/lat-pulldown/otlab) (local environment setup), [vm-dmz](https://github.com/lat-pulldown/vm-dmz) (vm environment setup)**
-
 ## Research Overview
 This research aims to establish a framework for emulating industrial environments to collect realistic OT (Operational Technology) communication logs and evaluate machine learning models for real-time anomaly detection. By integrating automated attack emulation `Caldera` with a virtualized industrial target `Conpot`, the system generates high-fidelity datasets that represent both normal operations and diverse cyber-attack scenarios. The framework serves as a standardized benchmarking platform to assess how different deep learning architectures handle the strict accuracy and low-latency requirements essential for protecting critical infrastructure.   
 
@@ -27,6 +25,8 @@ The system spans two environments. Ensure they are on the same network subnet to
 * **Local Machine (macOS/Windows):** Runs the Preprocessor, scripts, datasets, and the Deep-Learning Models.  
 * **Virtual Machine (Ubuntu/Linux):** Runs the ICS honeypot `Conpot`, IoT platform `Thingsboard`, and attack emulation tool `Caldera`.  
 * **Physical OT Device:** Optional. The example Temperature data `temp.csv` is from a Thermal Camera ([OMRON K6PM](https://automation.omron.com/en/us/products/family/K6PM/k6pm-thmd-eip)). If connecting in real-time, be sure they are in the same network subnet.  
+
+**Visit [otlab](https://github.com/lat-pulldown/otlab) for local environment setup, and [vm-dmz](https://github.com/lat-pulldown/vm-dmz) for vm environment setup.**
 
 ---
 
