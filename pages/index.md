@@ -10,12 +10,8 @@ This research aims to establish a framework for emulating industrial environment
 ---
 
 ## Walkthrough
-Watch this screen recording to see the full flow of log generation, alignment, and model prediction.
-
-<video width="100%" controls>
-  <source src="videos/setup_recording.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+Watch this screen recording to see the flow of log generation, and model prediction.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4OtfZw2w0F0?si=G2Uu-qFIiDVDH9s7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ---
 
