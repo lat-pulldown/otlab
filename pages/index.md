@@ -140,28 +140,23 @@ To stop Conpot
 ```
 docker-compose down
 ```
-To start Caldera
+To start Caldera (`Ctrl+C` to stop)
 ```
 sudo ~/caldera
 source caldera-env/bin/activate && python3 server.py
 ```
-`Ctrl+C` to stop Caldera
-```
-sudo ~/conpot && docker-compose up -d
-```
 To start Thingsboard
 ```
-docker-compose down
+sudo ~/thingsboard && docker-compose up -d
 ```
 To stop Thingsboard
 ```
-sudo ~/conpot && docker-compose up -d
+docker-compose down
 ```
-To start pottotb.py
+To start pottotb.py (`Ctrl+C` to stop)
 ```
 cd ~ && python3 pottotb.py
 ```
-`Ctrl+C` to stop pottotb.py
 ### 1. Log Generation
 #### 1.1. Normal Log for Training (Insert VM_IP to `robust_polling.py` @line 6)
 **In local environment...**  
