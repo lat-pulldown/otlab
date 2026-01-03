@@ -51,35 +51,39 @@ multipass launch 22.04 \
   --memory 8G \
   --disk 40G
 ```
-#### 2.4. Enter the shell
+#### 2.3. Enter the shell
 ```
 multipass shell dmz
 ```
 `multipass stop dmz` to stop, `multipass start dmz` to start again.
-#### 2.5. (Once inside the shell...) Clone Github [vm-dmz](https://github.com/lat-pulldown/vm-dmz)
+#### 2.4. (Once inside the shell...) Clone Github [vm-dmz](https://github.com/lat-pulldown/vm-dmz)
 ```
 git clone https://github.com/lat-pulldown/vm-dmz.git
 ```
-#### 2.6. Build Conpot, Thingsboard, and Caldera
+#### 2.5. Build Conpot, Thingsboard, and Caldera (Use different terminal for each)
+Note: This shell script is optimized for Apple Silicon (ARM-based macOS). If you are using an Intel-based Mac, Windows (AMD/Intel), or Linux machine, some commands—especially Docker image tags or architecture-specific settings—may need to be adjusted accordingly.  
+For Conpot
 ```
 chmod +x setup_conpot.sh
 ./setup_conpot.sh
 ```
+For Thingsboard
 ```
 chmod +x setup_tb.sh
 ./setup_tb.sh
 ```
+For Caldera
 ```
 chmod +x setup_caldera.sh
 ./setup_caldera.sh
 ```
-#### 2.7. Open Thingsboard WebUI
+#### 2.6. Open Thingsboard WebUI
 1. Visit http://VM_IP:8080 in your local environment 
 2. Log in as usr:`tenant@thingsboard.org` pass: `tenant`
 3. Create Device
 4. Copy Access Token  
 
-#### 2.8. Change Conpot
+#### 2.7. Change Conpot
 1. Edit ~conpot/conpot/testing.cfg 
 Create `http_json` and `modbus`
 ```
@@ -100,14 +104,9 @@ enabled = True
 cd ~/conpot
 docker cp new_modbus.xml conpot:/usr/local/lib/python3.8/site-packages/conpot/templates/default/modbus/modbus.xml
 ```
-#### 2.9. Open Caldera WebUI
-Visit http://VM_IP:8888 in your local environment
-#### 2.10. To launch Conpot, Thingsboard, and Caldera
-```
-make start
-```
-`make stop` to stop  
-#### 2.11. Make a folder for sharing logs with local enviornment
+#### 2.8. Open Caldera WebUI
+Visit http://VM_IP:8888 in your local environment 
+#### 2.9. Make a folder for sharing logs with local enviornment
 ```
 mkdir ~/shared
 ```
