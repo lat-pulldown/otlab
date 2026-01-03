@@ -45,13 +45,13 @@ brew install --cask multipass
 Verify with `multipass version` and `multipass list`
 #### 2.2. Create a VM (We will name it dmz)
 ```
-multipass launch 22.04 \
+multipass launch lts \
   --name dmz \
   --cpus 4 \
   --memory 8G \
   --disk 40G
 ```
-#### 2.3. Enter the shell
+#### 2.3. Enter the shell (`exit` to exit shell)
 ```
 multipass shell dmz
 ```
