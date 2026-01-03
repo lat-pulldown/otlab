@@ -4,7 +4,7 @@ This research aims to establish a framework for emulating industrial environment
 
 ## Objectives
 - **Creating a Realistic Testbed:** To establish a reproducible environment to collect authentic industrial logs.  
-- **Benchmarking Deep Learning Models:** To evaluat various architectures - `Isolation Forest`, `1D-CNN`, `DeepLog`, and `CNN-Transformer Hybrid` - to determine which provides the best balance of detection accuracy, latency, and computational load for critical infrastructure.  
+- **Benchmarking Deep Learning Models:** To evaluate various architectures - `Isolation Forest`, `1D-CNN`, `DeepLog`, and `CNN-Transformer Hybrid` - to determine which provides the best balance of detection accuracy, latency, and computational load for critical infrastructure.  
 - **Cyber-Physical Visualization and Modeling:** To provide a dashboard `Thingsboard`, to visualize network attack intensity alongside physical data to better understand the potential impact of cyber events on physical assets. To implement a `CNN-Transformer Hybrid` model that performs feature fusion across multi-domain datasets to improve detection accuracy and interpret cyber-physical correlation.
 
 ---
@@ -21,6 +21,7 @@ The system spans two environments. Ensure they are on the same network subnet to
 * **Local Machine (macOS/Windows):** Runs the Preprocessor, scripts, datasets, and the Deep-Learning Models.  
 * **Virtual Machine (Ubuntu/Linux):** Runs the ICS honeypot `Conpot`, IoT platform `Thingsboard`, and attack emulation tool `Caldera`.  
 * **Physical OT Device:** Optional. The example Temperature data `temp.csv` is from a Thermal Camera ([OMRON K6PM](https://automation.omron.com/en/us/products/family/K6PM/k6pm-thmd-eip)). If connecting in real-time, be sure they are in the same network subnet.  
+
 
 **Visit [otlab](https://github.com/lat-pulldown/otlab) for local environment setup, and [vm-dmz](https://github.com/lat-pulldown/vm-dmz) for vm environment setup.**
 
@@ -59,12 +60,19 @@ multipass shell dmz
 ```
 git clone https://github.com/lat-pulldown/vm-dmz.git
 ```
-#### 2.6. Build Conpot, Thingsboard, and Caldera (all at once)
+#### 2.6. Build Conpot, Thingsboard, and Caldera
 ```
-chmod +x setup_dmz_full.sh
-./setup_dmz_full.sh
+chmod +x setup_conpot.sh
+./setup_conpot.sh
 ```
-For individual setup use `setup_dmz_conpot`, `setup_dmz_tb`, or `setup_dmz_caldera`. Make sure to use `chmod +x setup_dmz_xxxx.sh`.
+```
+chmod +x setup_tb.sh
+./setup_tb.sh
+```
+```
+chmod +x setup_caldera.sh
+./setup_caldera.sh
+```
 #### 2.7. Open Thingsboard WebUI
 1. Visit http://VM_IP:8080 in your local environment 
 2. Log in as usr:`tenant@thingsboard.org` pass: `tenant`
@@ -123,11 +131,37 @@ multipass mount ./logshare dmz:/home/ubuntu/shared
 
 ## Execution Steps
 **In VM environment...** 
-### 0. Start all VM services (Starts Conpot, Thingsboard, Caldera, and pottotb.py)
+### 0. Start all VM services (Use different terminals for each)  
+To start Conpot
 ```
-sudo ~/start.sh
+sudo ~/conpot && docker-compose up -d
 ```
-`sudo ~/stop.sh` to stop all.
+To stop Conpot
+```
+docker-compose down
+```
+To start Caldera
+```
+sudo ~/caldera
+source caldera-env/bin/activate && python3 server.py
+```
+`Ctrl+C` to stop Caldera
+```
+sudo ~/conpot && docker-compose up -d
+```
+To start Thingsboard
+```
+docker-compose down
+```
+To stop Thingsboard
+```
+sudo ~/conpot && docker-compose up -d
+```
+To start pottotb.py
+```
+cd ~ && python3 pottotb.py
+```
+`Ctrl+C` to stop pottotb.py
 ### 1. Log Generation
 #### 1.1. Normal Log for Training (Insert VM_IP to `robust_polling.py` @line 6)
 **In local environment...**  
@@ -261,15 +295,15 @@ python3 iforest.py -mode train
 ```	
 Test for `noise_tf01.csv`
 ```
-python3 iforest.py -mode test -data ../data/noise_tf.csv		
+python3 iforest.py -mode test -data ~data/noise_tf.csv		
 ```	
 Test for `attack_tf01.csv`
 ```
-python3 iforest.py -mode test -data ../data/attack_tf.csv		
+python3 iforest.py -mode test -data ~/data/attack_tf.csv		
 ```
 Test for `mix.csv`
 ```
-python3 iforest.py -mode test -data ../data/mix_tf.csv		
+python3 iforest.py -mode test -data ~/data/mix_tf.csv		
 ```		
 #### 4.2. 1D-CNN
 ```
@@ -281,15 +315,15 @@ python3 cnn_train.py
 ```	
 Test for `noise.csv`
 ```
-python3 cnn.py -mode test -data ../data/noise.csv		
+python3 cnn.py -mode test -data ~/data/noise.csv		
 ```	
 Test for `attack.csv`
 ```
-python3 cnn.py -mode test -data ../data/attack.csv		
+python3 cnn.py -mode test -data ~/data/attack.csv		
 ```	
 Test for `mix.csv`
 ```
-python3 cnn.py -mode test -data ../data/mix.csv		
+python3 cnn.py -mode test -data ~/data/mix.csv		
 ```
 #### 4.3. DeepLog ([GitHub](https://github.com/wuyifan18/DeepLog))
 ```
@@ -301,15 +335,15 @@ python3 model_train.py
 ```	
 Test for `noise.csv`
 ```
-python3 model_test.py -mode test -data ../data/noise.csv		
+python3 model_test.py -mode test -data ~/data/noise.csv		
 ```
 Test for `attack.csv`
 ```
-python3 model_test.py -mode test -data ../data/attack.csv		
+python3 model_test.py -mode test -data ~/data/attack.csv		
 ```
 Test for `mix.csv`
 ```
-python3 model_test.py -mode test -data ../data/mix.csv		
+python3 model_test.py -mode test -data ~/data/mix.csv		
 ```
 #### 4.4. Hybrid Variate
 ```
@@ -322,15 +356,15 @@ python3 hybrid_train.py
 ```
 Test for `noise.csv`
 ```
-python3 hybrid_test.py -mode test -data ../data/noise.csv		
+python3 hybrid_test.py -mode test -data ~/data/noise.csv		
 ```
 Test for `attack.csv`
 ```
-python3 hybrid_test.py -mode test -data ../data/attack.csv		
+python3 hybrid_test.py -mode test -data ~/data/attack.csv		
 ```
 Test for `mix.csv`
 ```
-python3 hybrid_test.py -mode test -data ../data/mix.csv		
+python3 hybrid_test.py -mode test -data ~/data/mix.csv		
 ```
 ##### 4.4.2. Temperature-Variate
 Train
@@ -339,26 +373,27 @@ python3 var_train.py
 ```
 Test for `noise_tf01.csv`
 ```
-python3 var_test.py -mode test -data ../data/noise_tf.csv		
+python3 var_test.py -mode test -data ~/data/noise_tf.csv		
 ```
 Test for `attack_tf01.csv`
 ```
-python3 var_test.py -mode test -data ../data/attack_tf.csv		
+python3 var_test.py -mode test -data ~/data/attack_tf.csv		
 ```
 Test for `mix_tf01.csv`
 ```
-python3 var_test.py -mode test -data ../data/mix_tf.csv		
+python3 var_test.py -mode test -data ~/data/mix_tf.csv		
 ```
 ##### 4.4.3. Correlation Test
 Test for `noise.csv`, `noise_tf01.csv`
 ```
-python3 fusion_test.py -cyber ../data/noise.csv -phys ../data/noise_tf.csv	
+python3 fusion_test.py -cyber ~/data/noise.csv -phys ~/data/noise_tf.csv	
 ```
 Test for `attack.csv`, `attack_tf01.csv`
 ```
-python3 fusion_test.py -cyber ../data/attack.csv -phys ../data/attack_tf.csv	
+python3 fusion_test.py -cyber ~/data/attack.csv -phys ~/data/attack_tf.csv	
 ```
 Test for `mix.csv`, `mix_tf01.csv`
 ```
-python3 fusion_test.py -cyber ../data/mix.csv -phys ../data/mix_tf.csv	
+python3 fusion_test.py -cyber ~/data/mix.csv -phys ~/data/mix_tf.csv	
 ```
+
