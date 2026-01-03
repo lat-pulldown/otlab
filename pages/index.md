@@ -104,7 +104,8 @@ enabled = True
 ```
 cd ~/conpot
 docker cp new_modbus.xml conpot:/usr/local/lib/python3.8/site-packages/conpot/templates/default/modbus/modbus.xml
-```  
+```    
+
 #### 2.8. Open Caldera WebUI
 Visit http://VM_IP:8888 in your local environment 
 #### 2.9. Make a folder for sharing logs with local enviornment
