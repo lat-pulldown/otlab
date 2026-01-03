@@ -15,7 +15,7 @@ Watch this screen recording to see the flow of log generation, and model predict
 
 ---
 
-## System Topology
+## System Structure
 The system spans two environments. Ensure they are on the same network subnet to allow Modbus communication.
 
 * **Local Machine (macOS/Windows):** Runs the Preprocessor, scripts, datasets, and the Deep-Learning Models.  
@@ -42,7 +42,7 @@ From Homebrew Terminal
 ```
 brew install --cask multipass
 ```
-Verify with `multipass version` and `multipass list`
+Verify with `multipass version`
 #### 2.2. Create a VM (We will name it dmz)
 ```
 multipass launch lts \
@@ -51,11 +51,12 @@ multipass launch lts \
   --memory 8G \
   --disk 40G
 ```
+Remember your IP address of VM with `multipass list` (We will call it <VM_IP>)
 #### 2.3. Enter the shell (`exit` to exit shell)
 ```
 multipass shell dmz
 ```
-`multipass stop dmz` to stop, `multipass start dmz` to start again.
+`multipass stop dmz` to stop, `multipass start dmz` to start it again.
 #### 2.4. (Once inside the shell...) Clone Github [vm-dmz](https://github.com/lat-pulldown/vm-dmz)
 ```
 git clone https://github.com/lat-pulldown/vm-dmz.git
@@ -78,10 +79,10 @@ chmod +x setup_caldera.sh
 ./setup_caldera.sh
 ```
 #### 2.6. Open Thingsboard WebUI
-1. Visit http://VM_IP:8080 in your local environment 
-2. Log in as usr:`tenant@thingsboard.org` pass: `tenant`
-3. Create Device
-4. Copy Access Token  
+1. Visit http://VM_IP:8080 in a browser   
+2. Log in as **username:`tenant@thingsboard.org` password: `tenant`** (You can change it later)
+3. Create Device for Conpot and pysical device (If you have one)
+4. Copy Device `access token` (We will call it <XXX_ACCESS_TOKEN>)
 
 #### 2.7. Change Conpot
 1. Edit ~conpot/conpot/testing.cfg 
@@ -91,7 +92,7 @@ Create `http_json` and `modbus`
 enabled = True
 host = <VM_IP>
 port = 8080
-url = /api/v1/<DEVICE_ACCESS_TOKEN>/telemetry
+url = /api/v1/<CONPOT_ACCESS_TOKEN>/telemetry
 method = POST
 interval = 5
 ```
@@ -103,24 +104,28 @@ enabled = True
 ```
 cd ~/conpot
 docker cp new_modbus.xml conpot:/usr/local/lib/python3.8/site-packages/conpot/templates/default/modbus/modbus.xml
-```
+```  
 #### 2.8. Open Caldera WebUI
 Visit http://VM_IP:8888 in your local environment 
 #### 2.9. Make a folder for sharing logs with local enviornment
 ```
 mkdir ~/shared
 ```
-
+#### 2.9. Start all services at once (From VMs root)
+```
+./start.sh
+```
+`./stop.sh` to stop all services  
 ### 3. Local Machine Setup
 #### 3.1. Clone [Github Repo](https://github.com/lat-pulldown/otlab)
 ```
 git clone https://github.com/lat-pulldown/otlab.git && cd otlab
 ```
-#### 3.2. Python libarary dependencies
+#### 3.2. Install Python library dependencies
 ```
 pip3 install -r requirements.txt
 ```
-#### 3.3. Mount folder to transfer logs from Conpot to Local  
+#### 3.3. Mount folder for transfering logs from Conpot to local  
 ```
 mkdir otlab/logshare && cd logshare
 multipass mount ./logshare dmz:/home/ubuntu/shared
@@ -130,7 +135,8 @@ multipass mount ./logshare dmz:/home/ubuntu/shared
 
 ## Execution Steps
 **In VM environment...** 
-### 0. Start all VM services (Use different terminals for each)  
+### 1. Start VM services individually (To use different terminals for each)  
+Note that you can start and stop all services at once using `./start.sh` and `./stop.sh`.  
 To start Conpot
 ```
 sudo ~/conpot && docker-compose up -d
@@ -156,130 +162,130 @@ To start pottotb.py (`Ctrl+C` to stop)
 ```
 cd ~ && python3 pottotb.py
 ```
-### 1. Log Generation
-#### 1.1. Normal Log for Training (Insert VM_IP to `robust_polling.py` @line 6)
+### 2. Log Generation
+#### 2.1. Normal Log for Training (Insert VM_IP to `robust_polling.py` @line 6)
 **In local environment...**  
-1.1.1. Run Normal Polling script
+2.1.1. Run Normal Polling script
 ```
 cd /otlab/script
 python3 robust_polling.py
 ```
 **In VM environment...**  
-1.1.2. Move log from Conpot to Local
+2.1.2. Move log from Conpot to Local
 ```
-sudo mv /home/ubuntu/conpot/logs/conpot.log /home/ubuntu/conpot/logs/normal.log
+sudo mv ~/conpot/logs/conpot.log ~/conpot/logs/normal.log
 ```
 ```
 cd ~/conpot
 docker compose restart conpot
 ```
 ```
-sudo mv /home/ubuntu/conpot/logs/nomral.log /home/ubuntu/shared
+sudo mv ~/conpot/logs/nomral.log ~/shared
 ```
-#### 1.2. Noise Log 
+#### 2.2. Noise Log 
 **In local environemnt...**  
-1.2.1. Run Normal Polling script (Don't run this for `pure_noise.log`)
+2.2.1. Run Normal Polling script (Don't run this for `pure_noise.log`)
 ```
 cd /otlab/script
 python3 robust_polling.py
 ```
-1.2.2. Open Port:502 and open SSH Tunnel (In a new terminal)
+2.2.2. Open Port:502 and open SSH Tunnel (In a new terminal)
 ```
 sudo ssh -i /var/root/Library/Application\ Support/multipassd/ssh-keys/id_rsa -L 0.0.0.0:50502:localhost:502 ubuntu@<VM_IP>
 ```
 **In VM environment...**  
-1.2.3. Check if Port 502 is open
+2.2.3. Check if Port 502 is open
 ```
 nc -zv <VM_IP> 502
 ```
-1.2.4. Move log from Conpot to Local
+2.2.4. Move log from Conpot to Local
 ```
-sudo mv /home/ubuntu/conpot/logs/conpot.log /home/ubuntu/conpot/logs/noise.log
+sudo mv ~/conpot/logs/conpot.log ~/conpot/logs/noise.log
 ```
 ```
 cd ~/conpot
 docker compose restart conpot
 ```
 ```
-sudo mv /home/ubuntu/conpot/logs/noise.log /home/ubuntu/shared
+sudo mv ~/conpot/logs/noise.log ~/shared
 ```
 **In local environment...** 
-#### 1.3. Attack Log  
-1.3.1. Run Normal Polling script (Don't run this for `pure_attack.log`)
+#### 2.3. Attack Log  
+2.3.1. Run Normal Polling script (Don't run this for `pure_attack.log`)
 ```
 cd /otlab/script
 python3 robust_polling.py
 ```	
 **In VM environment...**  
-1.3.2. Start Caldera (Only if you haven't started it with `sudo ~/start.sh`)
+2.3.2. Start Caldera (If you haven't started it already)
 ```
-cd /home/ubuntu/caldera
+cd ~/caldera
 python3 server.py
 ```
-1.3.3. Open WebUI at http://<VM_IP>:8888
-1.3.4. Create an Agent  
-1.3.5. Create Operations and run it  
-1.3.5. Move log from Conpot to Local
+2.3.3. Open WebUI at http://<VM_IP>:8888
+2.3.4. Create an Agent  
+2.3.5. Create Operations and run it  
+2.3.5. Move log from Conpot to Local
 ```
-sudo mv /home/ubuntu/conpot/logs/conpot.log /home/ubuntu/conpot/logs/attack.log
+sudo mv ~/conpot/logs/conpot.log ~/conpot/logs/attack.log
 ```
 ```
 cd ~/conpot
 docker compose restart conpot
 ```
 ```
-sudo mv /home/ubuntu/conpot/logs/attack.log /home/ubuntu/shared
+sudo mv ~/conpot/logs/attack.log ~/shared
 ```
 **In local environment...**  
-#### 1.4. Mix Log
-1.4.1. Put `normal.log`, `pure_noise.log`, and `pure_attack.log` under `/script`  
-1.4.2. Run logmixer.py
+#### 2.4. Mix Log
+2.4.1. Put `normal.log`, `pure_noise.log`, and `pure_attack.log` under `/script`  
+2.4.2. Run logmixer.py
 ```
 cd /otlab/script
 python3 logmixer.py
 ```
-1.4.3. Align the datetime of `pre_mix.log` to output `mix.log`
+2.4.3. Align the datetime of `pre_mix.log` to output `mix.log`
 ```
 python3 aligner.py pre_mix.log mix.log
 ```
-1.4.4. Move the created logs `normal.log` `noise.log` `attack.log` `mix.log` to `/preprocessor`  
+2.4.4. Move the created logs `normal.log` `noise.log` `attack.log` `mix.log` to `/preprocessor`  
 
-### 2. Thingsboard
+### 3. Thingsboard
 **In local environment...**  
-#### 2.1. Send temperature data to Thingsboard
-Send tempurature via `temp.csv` taken from a thermal camera (Copy your ACCESS_TOKEN from Thingsboard to `camera_replay.py` @line 13)
+#### 3.1. Send temperature data to Thingsboard
+Send tempurature via `temp.csv` taken from a thermal camera (Copy your PHYSICAL_ACCESS_TOKEN from Thingsboard to `camera_replay.py` @line 13)
 ```
 cd /otlab/templog
 python3 camera_replay.py
 ```
 **In VM environment...**  
-#### 2.2. Send Conpot logs in real-time (Copy VM_IP and DEVICE_ACCESS_TOKEN from Thingsboard to `pottotb.py` @line 10, 11)
+#### 3.2. Send Conpot logs in real-time (Copy VM_IP and CONPOT_ACCESS_TOKEN from Thingsboard to `pottotb.py` @line 10, 11)
 ```
-cd /home/ubuntu && python3 pottotb.py
+cd ~ && python3 pottotb.py
 ```  
 
-### 3. Preprocessor  
-#### 3.1. Generate training dataset `normal.log`
+### 4. Preprocessor  
+#### 4.1. Generate training dataset `normal.log`
 ```
 cd /otlab/preprocessor
 python3 parser.py -mode train -log normal.log
 ```
-#### 3.2. Generate testing dataset - `noise.log` (Change X according to version)
+#### 4.2. Generate testing dataset - `noise.log` (Change X according to version)
 ```
 python3 parser.py --mode predict --log noise.log --out noiseX.csv --out_tf noiseX
 ```
-#### 3.3. Generate testing dataset - `attack.log` (Change X according to version)
+#### 4.3. Generate testing dataset - `attack.log` (Change X according to version)
 ```
 python3 parser.py --mode predict --log attack.log --out attackX.csv --out_tf attackX
 ```
-#### 3.4. Generate testing dataset - `mix.log` (Change X according to version)
+#### 4.4. Generate testing dataset - `mix.log` (Change X according to version)
 ```
 python3 parser.py --mode predict --log mix.log --out mixX.csv --out_tf mixX
 ```  
 
-### 4: Evaluating models
+### 5: Evaluating models
 **In local environment...**  
-#### 4.1. Isolation Forest
+#### 5.1. Isolation Forest
 ```
 cd /otlab/iforest
 ```
@@ -299,7 +305,7 @@ Test for `mix.csv`
 ```
 python3 iforest.py -mode test -data ~/data/mix_tf.csv		
 ```		
-#### 4.2. 1D-CNN
+#### 5.2. 1D-CNN
 ```
 cd /otlab/cnn	
 ```
@@ -319,7 +325,7 @@ Test for `mix.csv`
 ```
 python3 cnn.py -mode test -data ~/data/mix.csv		
 ```
-#### 4.3. DeepLog ([GitHub](https://github.com/wuyifan18/DeepLog))
+#### 5.3. DeepLog ([GitHub](https://github.com/wuyifan18/DeepLog))
 ```
 cd /otlab/deeplog
 ```	
@@ -339,11 +345,11 @@ Test for `mix.csv`
 ```
 python3 model_test.py -mode test -data ~/data/mix.csv		
 ```
-#### 4.4. Hybrid Variate
+#### 5.4. Hybrid Variate
 ```
 cd /otlab/hyvar	
 ```	
-##### 4.4.1. 1D-CNN-Transformer
+##### 5.4.1. 1D-CNN-Transformer
 Train
 ```
 python3 hybrid_train.py
@@ -360,7 +366,7 @@ Test for `mix.csv`
 ```
 python3 hybrid_test.py -mode test -data ~/data/mix.csv		
 ```
-##### 4.4.2. Temperature-Variate
+##### 5.4.2. Temperature-Variate
 Train
 ```
 python3 var_train.py		
@@ -377,7 +383,7 @@ Test for `mix_tf01.csv`
 ```
 python3 var_test.py -mode test -data ~/data/mix_tf.csv		
 ```
-##### 4.4.3. Correlation Test
+##### 5.4.3. Correlation Test
 Test for `noise.csv`, `noise_tf01.csv`
 ```
 python3 fusion_test.py -cyber ~/data/noise.csv -phys ~/data/noise_tf.csv	
