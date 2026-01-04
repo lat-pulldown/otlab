@@ -5,7 +5,7 @@ This research aims to establish a framework for emulating industrial environment
 ## Objectives
 - **Creating a Realistic Testbed:** To establish a reproducible environment to collect authentic industrial logs.  
 - **Benchmarking Deep Learning Models:** To evaluate various architectures - `Isolation Forest`, `1D-CNN`, `DeepLog`, and `CNN-Transformer Hybrid` - to determine which provides the best balance of detection accuracy, latency, and computational load for critical infrastructure.  
-- **Cyber-Physical Visualization and Modeling:** To provide a dashboard `Thingsboard`, to visualize network attack intensity alongside physical data to better understand the potential impact of cyber events on physical assets. To implement a `CNN-Transformer Hybrid` model that performs feature fusion across multi-domain datasets to improve detection accuracy and interpret cyber-physical correlation.
+- **Cyber-Physical Visualization and Modeling:** To provide a dashboard `ThingsBoard`, to visualize network attack intensity alongside physical data to better understand the potential impact of cyber events on physical assets. To implement a `CNN-Transformer Hybrid` model that performs feature fusion across multi-domain datasets to improve detection accuracy and interpret cyber-physical correlation.
 
 ---
 
@@ -19,8 +19,8 @@ Watch this screen recording to see the flow of log generation, and model predict
 The system spans two environments. Ensure they are on the same network subnet to allow Modbus communication.
 
 * **Local Machine (macOS/Windows):** Runs the Preprocessor, scripts, datasets, and the Deep-Learning Models.  
-* **Virtual Machine (Ubuntu/Linux):** Runs the ICS honeypot `Conpot`, IoT platform `Thingsboard`, and attack emulation tool `Caldera`.  
-* **Physical OT Device:** Optional. The example Temperature data `temp.csv` is from a Thermal Camera ([OMRON K6PM](https://automation.omron.com/en/us/products/family/K6PM/k6pm-thmd-eip)). If connecting in real-time, be sure they are in the same network subnet.  
+* **Virtual Machine (Ubuntu/Linux):** Runs the ICS honeypot `Conpot`, IoT platform `ThingsBoard`, and attack emulation tool `Caldera`.  
+* **Physical OT Device:** Optional. The example Temperature data `temp.csv` is from a Thermal Camera ([OMRON K6PM](https://automation.omron.com/en/us/products/family/K6PM/k6pm-thmd-eip)). If connecting in real-time, make sure they are in the same network subnet.  
 
 
 **Visit [otlab](https://github.com/lat-pulldown/otlab) for local environment setup, and [vm-dmz](https://github.com/lat-pulldown/vm-dmz) for vm environment setup.**
@@ -31,8 +31,8 @@ The system spans two environments. Ensure they are on the same network subnet to
 
 ### 1. Getting Started
 #### 1.1. Prerequisites
-- This setup guide is for macOS (Apple Silicon).
-- Also works with Intel Macs and Windows PC (Each commands may be different).  
+- This setup guide is for Apple Silicon macOS.
+- Commands may be different for Intel Macs and Windows PC.  
   
 #### 1.2. Install [Python](https://www.python.org/downloads/)
 
@@ -43,7 +43,7 @@ From Homebrew Terminal
 brew install --cask multipass
 ```
 Verify with `multipass version`
-#### 2.2. Create a VM (We will name it dmz)
+#### 2.2. Create a VM (named `dmz`)
 ```
 multipass launch lts \
   --name dmz \
@@ -51,7 +51,7 @@ multipass launch lts \
   --memory 8G \
   --disk 40G
 ```
-Remember your IP address of VM with `multipass list` (We will call it <VM_IP>)
+Remember your IP address of VM with `multipass list` (We will call it VM_IP)
 #### 2.3. Enter the shell (`exit` to exit shell)
 ```
 multipass shell dmz
@@ -61,14 +61,14 @@ multipass shell dmz
 ```
 git clone https://github.com/lat-pulldown/vm-dmz.git
 ```
-#### 2.5. Build Conpot, Thingsboard, and Caldera (Use different terminal for each)
-Note: This shell script is optimized for Apple Silicon (ARM-based macOS). If you are using an Intel-based Mac, Windows (AMD/Intel), or Linux machine, some commands—especially Docker image tags or architecture-specific settings—may need to be adjusted accordingly.  
+#### 2.5. Build Conpot, ThingsBoard, and Caldera (Use different terminal for each)
+**Note:** This shell script is optimized for Apple Silicon (ARM-based macOS). If you are using an Intel-based Mac, Windows (AMD/Intel), or Linux machine, some commands—especially Docker image tags or architecture-specific settings—may need to be adjusted accordingly.  
 For Conpot
 ```
 chmod +x setup_conpot.sh
 ./setup_conpot.sh
 ```
-For Thingsboard
+For ThingsBoard
 ```
 chmod +x setup_tb.sh
 ./setup_tb.sh
@@ -78,14 +78,14 @@ For Caldera
 chmod +x setup_caldera.sh
 ./setup_caldera.sh
 ```
-#### 2.6. Open Thingsboard WebUI
+#### 2.6. Open ThingsBoard WebUI
 1. Visit http://VM_IP:8080 in a browser   
 2. Log in as **username:`tenant@thingsboard.org` password: `tenant`** (You can change it later)
 3. Create Device for Conpot and pysical device (If you have one)
-4. Copy Device `access token` (We will call it <XXX_ACCESS_TOKEN>)
+4. Copy Device `access token` (We will call it XXX_ACCESS_TOKEN)
 
 #### 2.7. Change Conpot
-1. Edit ~conpot/conpot/testing.cfg 
+1. Edit ~/conpot/conpot/testing.cfg 
 Create `http_json` and `modbus`
 ```
 [http_json]
@@ -137,10 +137,10 @@ multipass mount ./logshare dmz:/home/ubuntu/shared
 ## Execution Steps
 **In VM environment...** 
 ### 1. Start VM services individually (To use different terminals for each)  
-Note that you can start and stop all services at once using `./start.sh` and `./stop.sh`.  
+**Note:** You can start and stop all services at once using `./start.sh` and `./stop.sh`.  
 To start Conpot
 ```
-sudo ~/conpot && docker-compose up -d
+cd ~/conpot && docker-compose up -d
 ```
 To stop Conpot
 ```
@@ -148,14 +148,14 @@ docker-compose down
 ```
 To start Caldera (`Ctrl+C` to stop)
 ```
-sudo ~/caldera
+cd ~/caldera
 source caldera-env/bin/activate && python3 server.py
 ```
-To start Thingsboard
+To start ThingsBoard
 ```
-sudo ~/thingsboard && docker-compose up -d
+cd ~/thingsboard && docker-compose up -d
 ```
-To stop Thingsboard
+To stop ThingsBoard
 ```
 docker-compose down
 ```
@@ -223,7 +223,7 @@ python3 robust_polling.py
 cd ~/caldera
 python3 server.py
 ```
-2.3.3. Open WebUI at http://<VM_IP>:8888
+2.3.3. Open WebUI at http://VM_IP:8888
 2.3.4. Create an Agent  
 2.3.5. Create Operations and run it  
 2.3.5. Move log from Conpot to Local
@@ -251,16 +251,16 @@ python3 aligner.py pre_mix.log mix.log
 ```
 2.4.4. Move the created logs `normal.log` `noise.log` `attack.log` `mix.log` to `/preprocessor`  
 
-### 3. Thingsboard
+### 3. ThingsBoard
 **In local environment...**  
-#### 3.1. Send temperature data to Thingsboard
-Send tempurature via `temp.csv` taken from a thermal camera (Copy your PHYSICAL_ACCESS_TOKEN from Thingsboard to `camera_replay.py` @line 13)
+#### 3.1. Send temperature data to ThingsBoard
+Send tempurature via `temp.csv` taken from a thermal camera (Copy your PHYSICAL_ACCESS_TOKEN from ThingsBoard to `camera_replay.py` @line 13)
 ```
 cd /otlab/templog
 python3 camera_replay.py
 ```
 **In VM environment...**  
-#### 3.2. Send Conpot logs in real-time (Copy VM_IP and CONPOT_ACCESS_TOKEN from Thingsboard to `pottotb.py` @line 10, 11)
+#### 3.2. Send Conpot logs in real-time (Copy VM_IP and CONPOT_ACCESS_TOKEN from ThingsBoard to `pottotb.py` @line 10, 11)
 ```
 cd ~ && python3 pottotb.py
 ```  
@@ -296,15 +296,15 @@ python3 iforest.py -mode train
 ```	
 Test for `noise_tf01.csv`
 ```
-python3 iforest.py -mode test -data ~data/noise_tf.csv		
+python3 iforest.py -mode test -data ../data/noise_tf.csv		
 ```	
 Test for `attack_tf01.csv`
 ```
-python3 iforest.py -mode test -data ~/data/attack_tf.csv		
+python3 iforest.py -mode test -data ../data/attack_tf.csv		
 ```
 Test for `mix.csv`
 ```
-python3 iforest.py -mode test -data ~/data/mix_tf.csv		
+python3 iforest.py -mode test -data ../data/mix_tf.csv		
 ```		
 #### 5.2. 1D-CNN
 ```
@@ -316,15 +316,15 @@ python3 cnn_train.py
 ```	
 Test for `noise.csv`
 ```
-python3 cnn.py -mode test -data ~/data/noise.csv		
+python3 cnn.py -mode test -data ../data/noise.csv		
 ```	
 Test for `attack.csv`
 ```
-python3 cnn.py -mode test -data ~/data/attack.csv		
+python3 cnn.py -mode test -data ../data/attack.csv		
 ```	
 Test for `mix.csv`
 ```
-python3 cnn.py -mode test -data ~/data/mix.csv		
+python3 cnn.py -mode test -data ../data/mix.csv		
 ```
 #### 5.3. DeepLog ([GitHub](https://github.com/wuyifan18/DeepLog))
 ```
@@ -336,15 +336,15 @@ python3 model_train.py
 ```	
 Test for `noise.csv`
 ```
-python3 model_test.py -mode test -data ~/data/noise.csv		
+python3 model_test.py -mode test -data ../data/noise.csv		
 ```
 Test for `attack.csv`
 ```
-python3 model_test.py -mode test -data ~/data/attack.csv		
+python3 model_test.py -mode test -data ../data/attack.csv		
 ```
 Test for `mix.csv`
 ```
-python3 model_test.py -mode test -data ~/data/mix.csv		
+python3 model_test.py -mode test -data ../data/mix.csv		
 ```
 #### 5.4. Hybrid Variate
 ```
@@ -357,15 +357,15 @@ python3 hybrid_train.py
 ```
 Test for `noise.csv`
 ```
-python3 hybrid_test.py -mode test -data ~/data/noise.csv		
+python3 hybrid_test.py -mode test -data ../data/noise.csv		
 ```
 Test for `attack.csv`
 ```
-python3 hybrid_test.py -mode test -data ~/data/attack.csv		
+python3 hybrid_test.py -mode test -data ../data/attack.csv		
 ```
 Test for `mix.csv`
 ```
-python3 hybrid_test.py -mode test -data ~/data/mix.csv		
+python3 hybrid_test.py -mode test -data ../data/mix.csv		
 ```
 ##### 5.4.2. Temperature-Variate
 Train
@@ -374,27 +374,27 @@ python3 var_train.py
 ```
 Test for `noise_tf01.csv`
 ```
-python3 var_test.py -mode test -data ~/data/noise_tf.csv		
+python3 var_test.py -mode test -data ../data/noise_tf.csv		
 ```
 Test for `attack_tf01.csv`
 ```
-python3 var_test.py -mode test -data ~/data/attack_tf.csv		
+python3 var_test.py -mode test -data ../data/attack_tf.csv		
 ```
 Test for `mix_tf01.csv`
 ```
-python3 var_test.py -mode test -data ~/data/mix_tf.csv		
+python3 var_test.py -mode test -data ../data/mix_tf.csv		
 ```
 ##### 5.4.3. Correlation Test
 Test for `noise.csv`, `noise_tf01.csv`
 ```
-python3 fusion_test.py -cyber ~/data/noise.csv -phys ~/data/noise_tf.csv	
+python3 fusion_test.py -cyber ../data/noise.csv -phys ../data/noise_tf.csv	
 ```
 Test for `attack.csv`, `attack_tf01.csv`
 ```
-python3 fusion_test.py -cyber ~/data/attack.csv -phys ~/data/attack_tf.csv	
+python3 fusion_test.py -cyber ../data/attack.csv -phys ../data/attack_tf.csv	
 ```
 Test for `mix.csv`, `mix_tf01.csv`
 ```
-python3 fusion_test.py -cyber ~/data/mix.csv -phys ~/data/mix_tf.csv	
+python3 fusion_test.py -cyber ../data/mix.csv -phys ../data/mix_tf.csv	
 ```
 

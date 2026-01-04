@@ -23,7 +23,7 @@ Contains 1 training and 3 testing datasets
 ## Evalutating models
 **Default dataset:** `mix.csv`  
 
-Change with `-data ~/data/XX.csv` (`-cyber ~/data/XX.csv -phys ~/data/YY.csv` for fusion_test.py)
+Change with `-data ../data/XX.csv` (`-cyber ../data/XX.csv -phys ../data/YY.csv` for fusion_test.py)
 
 ### 1. Isolation Forest
 - Navigate to the directory:
