@@ -67,7 +67,8 @@ Change with `-data ../data/XX.csv` (`-cyber ../data/XX.csv -phys ../data/YY.csv`
 ```python3 fusion_test.py```
 
 ## Evaluation Results
-![](eval_report.png)
+Check out the evaluation results in `Evaluation.csv`
+![](eval_screenshot.png)
 
 ## Citation
 - DeepLog - [wuyifan18/DeepLog](https://github.com/wuyifan18/DeepLog)
